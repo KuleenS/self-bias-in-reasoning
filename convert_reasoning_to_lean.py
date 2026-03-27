@@ -44,13 +44,13 @@ def parse_args() -> argparse.Namespace:
 	parser.add_argument(
 		"--input",
 		type=Path,
-		default=Path("reasoning_chains.jsonl"),
+		default=Path("data/reasoning_chains.jsonl"),
 		help="Input JSONL file containing a 'chain' field.",
 	)
 	parser.add_argument(
 		"--output",
 		type=Path,
-		default=Path("reasoning_chains_lean.jsonl"),
+		default=Path("data/reasoning_chains_lean.jsonl"),
 		help="Output JSONL file for generated Lean code.",
 	)
 	parser.add_argument(
