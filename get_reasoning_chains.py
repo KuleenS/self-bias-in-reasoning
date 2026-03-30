@@ -74,7 +74,7 @@ Hypothesis:
 
     for example in folio_dataset:
         prompt = prompt_template.format(
-            premises=example.premises, hypothesis=example.conclusion
+            premises=example["premises"], hypothesis=example["conclusion"]
         )
 
         messages = [{"role": "user", "content": prompt}]
