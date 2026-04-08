@@ -41,10 +41,8 @@ def main():
     folio_dataset = FolioDataset()
     total_prompts = []
 
-    prompt_template = """You are an expert evaluator for the FOLIO logical reasoning benchmark.
-
-Task:
-You will be given a FOLIO example consisting of:
+    prompt_template = """Task:
+You will be given an example consisting of:
 - A set of premises/facts (may include rules, quantifiers, and relations)
 - A hypothesis/claim to evaluate
 
