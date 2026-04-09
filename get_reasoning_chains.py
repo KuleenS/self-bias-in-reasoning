@@ -44,7 +44,7 @@ def main():
     sampling_params = get_sampling_params(args.model)
 
     # Initialize the vLLM engine
-    llm = LLM(model=args.model)
+    llm = LLM(model=args.model, max_model_len=40960)
 
     folio_dataset = FolioDataset()
     total_prompts = []
@@ -85,7 +85,7 @@ Hypothesis:
 
         messages = [{"role": "user", "content": prompt}]
 
-        use_thinking = "qwen3" in args.model.lower()
+        use_thinking = "qwen3" in args.model.lower() or "gemma" in args.model.lower()
         template_kwargs = {"enable_thinking": True} if use_thinking else {}
         text = tokenizer.apply_chat_template(
             messages,
@@ -104,6 +104,8 @@ Hypothesis:
     model_slug = args.model.rstrip("/").split("/")[-1]
     out_path = args.output
     out_path = out_path.with_name(f"{out_path.stem}__{model_slug}{out_path.suffix}")
+    # Create parent directory if it doesn't exist
+    out_path.parent.mkdir(parents=True, exist_ok=True)
     
     with out_path.open("w", encoding="utf-8") as f:
         for output in outputs:
