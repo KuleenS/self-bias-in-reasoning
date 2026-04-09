@@ -7,6 +7,16 @@ from pathlib import Path
 import argparse
 
 
+def get_sampling_params(model: str) -> SamplingParams:
+    name = model.lower()
+    if "gemma" in name:
+        return SamplingParams(temperature=1.0, top_p=0.95, top_k=64, max_tokens=32768)
+    elif "deepseek" in name or "olmo" in name:
+        return SamplingParams(temperature=0.6, top_p=0.95, max_tokens=32768)
+    else:  # Qwen3 default
+        return SamplingParams(temperature=0.6, top_p=0.95, top_k=20, max_tokens=32768)
+
+
 def parse_args():
     p = argparse.ArgumentParser(description="Generate reasoning chains for FOLIO.")
     p.add_argument(
@@ -30,10 +40,8 @@ def main():
     # Initialize the tokenizer
     tokenizer = AutoTokenizer.from_pretrained(args.model)
 
-    # Configurae the sampling parameters (for thinking mode)
-    sampling_params = SamplingParams(
-        temperature=0.6, top_p=0.95, top_k=20, max_tokens=32768
-    )
+    # Configure sampling parameters per model
+    sampling_params = get_sampling_params(args.model)
 
     # Initialize the vLLM engine
     llm = LLM(model=args.model)
@@ -77,11 +85,13 @@ Hypothesis:
 
         messages = [{"role": "user", "content": prompt}]
 
+        use_thinking = "qwen3" in args.model.lower()
+        template_kwargs = {"enable_thinking": True} if use_thinking else {}
         text = tokenizer.apply_chat_template(
             messages,
             tokenize=False,
             add_generation_prompt=True,
-            enable_thinking=True,  # Set to False to strictly disable thinking
+            **template_kwargs,
         )
 
         total_prompts.append(text)
