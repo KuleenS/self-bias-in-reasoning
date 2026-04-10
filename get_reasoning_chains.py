@@ -44,7 +44,7 @@ def main():
     sampling_params = get_sampling_params(args.model)
 
     # Initialize the vLLM engine
-    llm = LLM(model=args.model, max_model_len=40960)
+    llm = LLM(model=args.model, trust_remote_code=True, max_model_len=40960)
 
     folio_dataset = FolioDataset()
     total_prompts = []
