@@ -20,7 +20,7 @@ def parse_args():
     p.add_argument(
         "--output",
         type=str,
-        default="validation_results.jsonl",
+        default="data/llm_verification",
         help="Path for the output JSONL file.",
     )
     return p.parse_args()
@@ -49,7 +49,7 @@ def create_validation_prompt(pov, premise, reasoning):
 
 def validate_reasoning_chains(input_file, model_name, output_file):
     # Initialize the LLM
-    llm = LLM(model=model_name)
+    llm = LLM(model=model_name, max_model_len=20960)
     
     # Sampling parameters for a simple "Yes/No" response
     sampling_params = SamplingParams(temperature=0.0, max_tokens=5)
@@ -77,7 +77,7 @@ def validate_reasoning_chains(input_file, model_name, output_file):
     # Run the LLM API call
     outputs = llm.generate(prompts, sampling_params)
 
-    with open(output_file, 'w', encoding='utf-8') as f_out:
+    with open(f"{output_file}/{model_name.replace("/", "_")}.jsonl", 'w', encoding='utf-8') as f_out:
         for i, output in enumerate(outputs):
             generated_text = output.outputs[0].text.strip()
             
