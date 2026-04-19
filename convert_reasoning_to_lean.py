@@ -64,7 +64,7 @@ def parse_args() -> argparse.Namespace:
 	parser.add_argument(
 		"--output",
 		type=Path,
-		default=Path("data/lean_Code/lean_code_outputs__Qwen3-32B.jsonl"),
+		default=Path("data/lean_code/lean_code_outputs__Qwen3-32B.jsonl"),
 		help="Output JSONL file for generated Lean code.",
 	)
 	parser.add_argument(
