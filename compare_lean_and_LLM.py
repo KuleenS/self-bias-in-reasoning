@@ -1,28 +1,27 @@
 import json
+import os
 import pandas as pd
 from pathlib import Path
 
-def get_matched_lean_data(lean_results_list, llm_result):
-    prompt_used = llm_result.get("prompt_used", "")
+LEAN_FILE = "data/code_verification/lean_verified__Olmo-Think.jsonl"
+VAL_FILE = "data/llm_verification/Olmo-3.1-32B-Think_eval_reasoning_output.jsonl"
     
-    # lean_results_list is now a list of the actual JSON objects
-    for result in lean_results_list:
-        lean_premises = result.get("premises", "").strip()
-        lean_hyp = result.get("hypothesis", "").strip()
-        
-        if lean_premises and lean_premises in prompt_used and lean_hyp in prompt_used:
-            # Return the boolean 'is_valid' from the lean_verification dict
-            return result.get("lean_verification", {}).get("is_valid", False)
-            
+def get_matched_lean_data(lean_lookup, llm_result):
+    idx = llm_result.get("index")
+    if idx is not None and idx in lean_lookup:
+        return lean_lookup[idx]
     return None
 
 def analyze_agreement(lean_file, validation_file):
-    # 1. Load Lean Data as a LIST of dictionaries
-    lean_results_list = []
+    # 1. Load in LEAN data
+    lean_lookup = {}
     with open(lean_file, 'r') as f:
         for line in f:
             if not line.strip(): continue
-            lean_results_list.append(json.loads(line))
+            data = json.loads(line)
+            idx = data.get("index")
+            if idx is not None:
+                lean_lookup[idx] = data
 
     # 2. Load and Compare LLM Validation Data
     comparison_data = []
@@ -32,21 +31,18 @@ def analyze_agreement(lean_file, validation_file):
             if not line.strip(): continue
             llm_result = json.loads(line)
             
-            pov = llm_result.get("pov")
-            raw_output = llm_result.get("validation_output", "").lower()
+            pov = llm_result.get("POV")
+            llm_judgment = llm_result.get("evaluator_judgment", "")
             
-            # Extract LLM judgment
-            llm_judgment = "true" in raw_output
-            
-            # matched_lean_val will now correctly get the boolean result
-            matched_lean_val = get_matched_lean_data(lean_results_list, llm_result)
+            matched_lean_obj = get_matched_lean_data(lean_lookup, llm_result)
 
-            if matched_lean_val is not None:
+            if matched_lean_obj is not None:
+                lean_truth = matched_lean_obj.get("lean_verification", {}).get("is_valid")
                 comparison_data.append({
                     "pov": pov,
                     "llm_judgment": llm_judgment,
-                    "lean_truth": matched_lean_val,
-                    "agrees": llm_judgment == matched_lean_val
+                    "lean_truth": lean_truth,
+                    "agrees": llm_judgment == lean_truth
                 })
 
     df = pd.DataFrame(comparison_data)
@@ -74,7 +70,4 @@ def analyze_agreement(lean_file, validation_file):
     print(pd.crosstab(df['lean_truth'], df['llm_judgment'], rownames=['Lean Truth'], colnames=['LLM Judgment']))
 
 if __name__ == "__main__":
-    LEAN_FILE = "data/code_verification/lean_verified__Qwen3-32B.jsonl"
-    VAL_FILE = "data/llm_verification/Qwen_Qwen3-32B.jsonl"
-    
     analyze_agreement(LEAN_FILE, VAL_FILE)
