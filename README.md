@@ -1,116 +1,153 @@
 # Self-Bias in Reasoning
 
-Research project investigating self-bias in LLM reasoning chains. The core question: when LLMs evaluate reasoning chains, does the validation outcome differ based on the attributed perspective (she/he/they/LLM)? Uses the [FOLIO](https://github.com/Yale-LILY/FOLIO) formal logic dataset.
+**Do reasoning models judge their *own* reasoning chains as correct more often than they judge
+other models' chains?**
 
-## Setup
+Each model in a pool both **generates** reasoning chains and **evaluates** chains (its own and
+others'). The question is whether a model's endorsement of a chain goes up when *it* produced the
+chain. We estimate the effect with a crossed mixed-effects model:
 
-```bash
-conda env create -f environment.yaml -n self-bias
-conda activate self-bias
+```
+score_ijkl = β0 + β_self · I_self
+             + u_generator_i + u_evaluator_j + u_dataset_k + u_prompt_l + ε
 ```
 
-`OPENAI_API_KEY` must be set for `convert_reasoning_to_lean.py`.
+- `score` — does evaluator *j* judge generator *i*'s chain on prompt *l* of dataset *k* as correct?
+- `I_self` — 1 when generator == evaluator. **`β_self` is the self-bias effect.**
+- `u_*` — crossed random intercepts for generator, evaluator, dataset, and prompt.
+
+Ground truth (whether a chain is *actually* correct) comes from **answer-matching**: we extract the
+chain's final answer and compare it to the dataset's gold answer. It is recorded for analysis but
+never shown to the evaluator.
+
+## Install
+
+Uses [uv](https://docs.astral.sh/uv/).
+
+```bash
+uv sync                 # core: analysis + API inference (no GPU)
+uv sync --extra vllm    # add local GPU inference (vLLM + torch)
+cp .env.example .env    # add OPENROUTER_API_KEY / HF_TOKEN as needed
+```
+
+Everything is exposed through the `selfbias` CLI (and the `scripts/` orchestrators):
+
+```bash
+uv run selfbias --help
+uv run selfbias models      # list the model pool
+uv run selfbias datasets    # list the datasets
+```
+
+## Datasets (10)
+
+`configs/datasets.yaml` is the single edit point (HF id / subset / split / answer type).
+
+| dataset | domain | answer type |
+|---|---|---|
+| gsm8k, math500, aime | math | numeric / freeform |
+| gpqa_diamond, mmlu_pro, arc_challenge | science / knowledge | mcq |
+| folio, logiqa | logic | mcq |
+| bbh | mixed hard | freeform |
+| commonsense_qa | commonsense | mcq |
+
+`answer_type` (`numeric` / `mcq` / `freeform`) drives both the generation instruction and the
+answer extractor in [`answers.py`](src/selfbias/answers.py). GPQA is gated — set `HF_TOKEN`.
+
+## Models
+
+`configs/models.yaml` defines the pool. Each model both generates and evaluates. Open-weight
+models run on local GPUs via vLLM; frontier models run through OpenRouter. **Verify OpenRouter
+slugs before a paid run — they drift.**
+
+- **Open (vLLM):** Qwen3-32B, DeepSeek-R1-Distill-32B, OLMo-3.1-32B-Think, Phi-4-reasoning, QwQ-32B, Gemma-3-27B (baseline).
+- **Frontier (OpenRouter):** GPT-5-class, Claude (thinking), Gemini-2.5, DeepSeek-R1, Grok.
+
+Three interchangeable inference backends (`src/selfbias/inference/`): `vllm_offline` (local batch),
+`vllm_online` (an OpenAI-compatible vLLM server), `openrouter`.
 
 ## Pipeline
 
-### 1. Generate reasoning chains
-
 ```bash
-python get_reasoning_chains.py \
-    --model Qwen/Qwen3-32B \
-    --output data/reasoning_chains_qwen/my_output.jsonl
+# 1. Generate reasoning chains (one model x one+ datasets)
+uv run selfbias generate -m Qwen/Qwen3-32B -d gsm8k -d folio -n 200
+#    -> data/chains/{dataset}/{model}.jsonl  (with extracted answer + is_correct)
+
+# 2. Cross-model evaluation (evaluator judges a generator's chains)
+uv run selfbias evaluate -e Qwen/Qwen3-32B -g microsoft/Phi-4-reasoning -d gsm8k
+#    -> data/judgments/{dataset}/{evaluator}__on__{generator}.jsonl
+
+# 3. Aggregate to the long table the model consumes
+uv run selfbias aggregate                 # -> results/judgments_long.parquet
+
+# 4. Fit the self-bias mixed-effects model
+uv run selfbias analyze --method bayes    # logistic crossed-RE GLMM (statsmodels, pure Python)
+uv run selfbias plot                      # endorsement heatmap (diagonal = self)
 ```
 
-Runs vLLM batch inference over the FOLIO dataset. Output fields: `prompt`, `generated_text`. The output filename is automatically suffixed with the model slug.
-
-Supported model families: Qwen3, DeepSeek, OLMo, Gemma (model-specific sampling params are applied automatically).
-
-### 2. Evaluate chains for perspective bias
+### Run everything
 
 ```bash
-python eval_reasoning_chains.py \
-    --model Qwen/Qwen3-32B \
-    --input data/reasoning_chains_qwen/reasoning_chains_outputs__Qwen3-32B.jsonl \
-    --output validation_results.jsonl
+# all models x all datasets, full square
+uv run python scripts/run_all.py --pool open
+
+# ...or save inference with a D-optimal subset of the square, then fit
+uv run python scripts/run_cross_analysis.py --pool open --budget 18
 ```
 
-Evaluates each reasoning chain from 4 perspectives: `she`, `he`, `they`, `LLM`. Output fields: `pov`, `validation_output`, `prompt_used`.
+On a cluster, run one model per job: `sbatch slurm/generate.job <MODEL>` and
+`sbatch slurm/evaluate.job <EVALUATOR> <GENERATOR>`.
 
-### 3. Convert reasoning to Lean code
+## D-optimal design (saving inference)
+
+The full experiment is the **G × G generator × evaluator square** run on every dataset; evaluating
+every cell is the dominant cost. [`doe.py`](src/selfbias/doe.py) instead selects a budget-sized
+subset of cells that maximizes `det(XᵀX)` (D-optimality) via Fedorov exchange, force-including all
+G self (diagonal) cells so `β_self` stays estimable.
 
 ```bash
-python convert_reasoning_to_lean.py \
-    --folio-input data/FOLIO/folio_train.jsonl \
-    --reasoning-input data/reasoning_chains_qwen/reasoning_chains_outputs__Qwen3-32B.jsonl \
-    --output data/lean_code/lean_code_outputs__Qwen3-32B.jsonl \
-    --model gpt-4o \
-    --temperature 0.0
+uv run selfbias doe --pool open --budget 18
+#   D-optimal design: 18/36 cells (12 params)
+#   D-efficiency vs full square: ~0.99
+#   inference saving:            50.0%
+#   manifest -> results/doe_manifest.json
 ```
 
-Uses OpenAI Batch API to formalize NL reasoning into Lean 4 proofs. Supports `--resume` (default: true) to skip already-processed indices.
+## Statistics
 
-### 4. Verify Lean code
+[`analysis/mixed_effects.py`](src/selfbias/analysis/mixed_effects.py):
+
+- `--method bayes` — logistic **crossed-random-effects GLMM** via statsmodels'
+  `BinomialBayesMixedGLM` (no R/lme4 needed). Reports `β_self`, posterior SD, and P(β_self > 0).
+- `--method lpm` — fast linear prob. model with a prompt random intercept (the original notebook
+  model) for a frequentist p-value.
+- Per-evaluator, Holm-corrected breakdown (one-sided H₁: β_self > 0).
+
+Grouping factors with <2 levels (e.g. a single dataset) are dropped automatically.
+
+### Reproduce the original FOLIO finding
+
+The original 4×4 FOLIO results are preserved in `results/*_on_*_full.jsonl`:
 
 ```bash
-python verify_lean_code.py \
-    --input data/lean_code/lean_code_outputs__Qwen3-32B.jsonl \
-    --output data/code_verification/lean_verified__Qwen3-32B.jsonl \
-    --lean-cmd auto \
-    --timeout-seconds 30
+uv run selfbias analyze --legacy --method lpm
+# β_self ≈ 0.033, one-sided p < 1e-3  (matches the original notebook)
 ```
 
-Runs the Lean compiler on each generated proof. The `lean_verification` output field contains `is_valid`, `error_type`, `error_message`, and `exit_code`.
+## Repository layout
 
-### 5. Evaluate error detection
-
-```bash
-python eval_error_detection.py \
-    --evaluator-model allenai/OLMo-3.1-32B-Think \
-    --evaluated-model Qwen/Qwen3-32B \
-    --enable-thinking \
-    --output results/olmo_on_qwen.jsonl
 ```
-
-Uses one model (the evaluator) to judge whether reasoning chains produced by another model (the evaluated model) are logically correct. Ground truth comes from Lean verification. Writes results incrementally in batches and supports resuming interrupted runs.
-
-Key arguments:
-
-| Argument | Default | Description |
-|---|---|---|
-| `--evaluator-model` | `Qwen/Qwen3-32B` | Model doing the judging |
-| `--evaluated-model` | `Qwen/Qwen3-32B` | Model whose traces are being judged |
-| `--enable-thinking` | off | Enable chain-of-thought tokens (Qwen3/Gemma) |
-| `--batch-size` | 50 | Prompts per vLLM call; results flushed after each batch |
-| `--num-problems` | all | Limit number of traces evaluated |
-| `--max-reasoning-chars` | 20000 | Truncate long reasoning chains before inserting into prompt |
-| `--reasoning-input` | from map | Override reasoning chains path |
-| `--verification-input` | from map | Override Lean verification path |
-
-Output fields per record: `index`, `evaluator_model`, `evaluated_model`, `premises`, `hypothesis`, `generated_text`, `raw_output_text`, `evaluator_thinking`, `evaluator_judgment` (bool), `parse_error` (bool).
-
-The `--evaluated-model` / `--reasoning-input` / `--verification-input` defaults are defined in `MODEL_DATA_MAP` at the top of the script.
-
-### 6. Compute evaluation metrics
-
-```bash
-python compute_eval_metrics.py \
-    --eval-input results/olmo_on_qwen.jsonl \
-    --verification-input data/code_verification/lean_verified__Qwen3-32B.jsonl \
-    --output results/olmo_on_qwen_metrics.json
+configs/         datasets.yaml · models.yaml · experiment.yaml   (the edit points)
+src/selfbias/
+  data/          ReasoningExample + the 10 dataset loaders
+  models/        model registry + per-family sampling
+  inference/     vllm_offline · vllm_online · openrouter (one Backend protocol)
+  answers.py     answer extraction + correctness (ground truth)
+  prompts.py     generation + evaluation templates
+  generate.py    evaluate.py   aggregate.py
+  doe.py         D-optimal generator×evaluator design
+  analysis/      mixed_effects.py · plots.py
+  cli.py  orchestrate.py
+scripts/         run_all.py · run_cross_analysis.py
+slurm/           generate.job · evaluate.job
+tests/
 ```
-
-Computes accuracy, precision, recall, and F1 against Lean-verified ground truth. Positive class is "reasoning trace is correct" (`evaluator_judgment == true`).
-
-Also reports:
-- `acc_on_correct_traces`: accuracy on traces Lean verified as correct
-- `acc_on_incorrect_traces`: accuracy on traces Lean verified as incorrect (i.e., error detection rate)
-
-`--output` is optional; omitting it prints results to stdout only.
-
-## Data
-
-- `data/FOLIO/` — Source dataset (train: 1001, validation: 203, test: 226 examples)
-- `data/reasoning_chains_{model}/` — Per-model chain outputs
-- `data/lean_code/` — Formalized Lean proofs
-- `data/code_verification/` — Lean verification results
-- `results/` — `eval_error_detection` outputs and metric summaries

@@ -1,0 +1,86 @@
+# The diverse top-10 reasoning datasets. HF ids / subsets / splits are the single edit point;
+# the column-mapping logic for each lives in src/selfbias/data/loaders.py (or folio.py).
+# answer_type drives the generation instruction and the answer extractor:
+#   numeric  -> compare normalized numbers
+#   mcq      -> compare option letters
+#   freeform -> compare normalized strings / math expressions
+
+gsm8k:
+  hf_id: openai/gsm8k
+  subset: main
+  split: test
+  answer_type: numeric
+  domain: math
+  description: Grade-school math word problems.
+
+math500:
+  hf_id: HuggingFaceH4/MATH-500
+  split: test
+  answer_type: freeform
+  domain: math
+  description: 500 competition math problems (subset of MATH) with boxed answers.
+
+aime:
+  hf_id: Maxwell-Jia/AIME_2024
+  split: train
+  answer_type: numeric
+  domain: math
+  description: AIME 2024 olympiad problems; integer answers 0-999.
+
+gpqa_diamond:
+  hf_id: Idavidrein/gpqa
+  subset: gpqa_diamond
+  split: train
+  answer_type: mcq
+  domain: science
+  gated: true   # requires HF_TOKEN + accepting the dataset terms
+  description: Graduate-level Google-proof science MCQs (Diamond split).
+
+mmlu_pro:
+  hf_id: TIGER-Lab/MMLU-Pro
+  split: test
+  answer_type: mcq
+  domain: knowledge
+  description: Harder, reasoning-focused MMLU with up to 10 options.
+
+arc_challenge:
+  hf_id: allenai/ai2_arc
+  subset: ARC-Challenge
+  split: test
+  answer_type: mcq
+  domain: science
+  description: Grade-school science MCQs, challenge split.
+
+bbh:
+  hf_id: lukaemon/bbh
+  split: test
+  answer_type: freeform
+  domain: mixed
+  description: BIG-Bench Hard; aggregated over the tasks listed below.
+  tasks:
+    - causal_judgement
+    - formal_fallacies
+    - logical_deduction_three_objects
+    - navigate
+    - date_understanding
+    - sports_understanding
+
+folio:
+  split: validation   # local JSONL under data/FOLIO/
+  answer_type: mcq
+  domain: logic
+  description: First-order-logic entailment; presented as True/False/Uncertain MCQ.
+
+logiqa:
+  hf_id: lucasmccabe/logiqa
+  split: test
+  answer_type: mcq
+  domain: logic
+  description: Logical reasoning MCQs derived from civil-service exams.
+
+commonsense_qa:
+  hf_id: tau/commonsense_qa
+  split: validation   # test labels are hidden
+  answer_type: mcq
+  domain: commonsense
+  description: Commonsense reasoning MCQs (5 options).

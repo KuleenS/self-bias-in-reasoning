@@ -1,5 +1,26 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.pytest_cache/
+.ruff_cache/
+
+# Environments
+.venv/
+.env
+
+# uv: uv.lock IS committed
+
+# Experiment artifacts
+*.parquet
+*.out
+*.err.log
+*.out.log
+slurm-*.out
+.DS_Store
 data/.DS_Store
 data/lean_code/.DS_Store
-.DS_Store
-*.out
 run_evals.sh
+
+# Generated plots
+results/plots/
