@@ -1,0 +1,2677 @@
+{
+  "models": [
+    "Qwen/Qwen3-32B",
+    "deepseek-ai/DeepSeek-R1-Distill-Qwen-32B",
+    "allenai/Olmo-3.1-32B-Think",
+    "microsoft/Phi-4-reasoning",
+    "deepseek-ai/DeepSeek-R1-Distill-Qwen-14B",
+    "deepseek-ai/DeepSeek-R1-Distill-Llama-8B",
+    "Qwen/Qwen3-14B",
+    "Qwen/Qwen3-8B",
+    "microsoft/Phi-4-reasoning-plus",
+    "openai/gpt-oss-20b",
+    "mistralai/Magistral-Small-2506",
+    "nvidia/Llama-3.1-Nemotron-Nano-8B-v1"
+  ],
+  "datasets": [
+    "gsm8k",
+    "math500",
+    "aime",
+    "gpqa_diamond",
+    "mmlu_pro",
+    "arc_challenge",
+    "bbh",
+    "folio",
+    "logiqa",
+    "commonsense_qa"
+  ],
+  "n_params": 24,
+  "n_full_square": 144,
+  "budget": 48,
+  "d_efficiency": 0.9419,
+  "inference_saving": 0.6667,
+  "cells": [
+    {
+      "generator": "Qwen/Qwen3-32B",
+      "evaluator": "Qwen/Qwen3-32B",
+      "is_self": true
+    },
+    {
+      "generator": "deepseek-ai/DeepSeek-R1-Distill-Qwen-32B",
+      "evaluator": "deepseek-ai/DeepSeek-R1-Distill-Qwen-32B",
+      "is_self": true
+    },
+    {
+      "generator": "allenai/Olmo-3.1-32B-Think",
+      "evaluator": "allenai/Olmo-3.1-32B-Think",
+      "is_self": true
+    },
+    {
+      "generator": "microsoft/Phi-4-reasoning",
+      "evaluator": "microsoft/Phi-4-reasoning",
+      "is_self": true
+    },
+    {
+      "generator": "deepseek-ai/DeepSeek-R1-Distill-Qwen-14B",
+      "evaluator": "deepseek-ai/DeepSeek-R1-Distill-Qwen-14B",
+      "is_self": true
+    },
+    {
+      "generator": "deepseek-ai/DeepSeek-R1-Distill-Llama-8B",
+      "evaluator": "deepseek-ai/DeepSeek-R1-Distill-Llama-8B",
+      "is_self": true
+    },
+    {
+      "generator": "Qwen/Qwen3-14B",
+      "evaluator": "Qwen/Qwen3-14B",
+      "is_self": true
+    },
+    {
+      "generator": "Qwen/Qwen3-8B",
+      "evaluator": "Qwen/Qwen3-8B",
+      "is_self": true
+    },
+    {
+      "generator": "microsoft/Phi-4-reasoning-plus",
+      "evaluator": "microsoft/Phi-4-reasoning-plus",
+      "is_self": true
+    },
+    {
+      "generator": "openai/gpt-oss-20b",
+      "evaluator": "openai/gpt-oss-20b",
+      "is_self": true
+    },
+    {
+      "generator": "mistralai/Magistral-Small-2506",
+      "evaluator": "mistralai/Magistral-Small-2506",
+      "is_self": true
+    },
+    {
+      "generator": "nvidia/Llama-3.1-Nemotron-Nano-8B-v1",
+      "evaluator": "nvidia/Llama-3.1-Nemotron-Nano-8B-v1",
+      "is_self": true
+    },
+    {
+      "generator": "deepseek-ai/DeepSeek-R1-Distill-Llama-8B",
+      "evaluator": "nvidia/Llama-3.1-Nemotron-Nano-8B-v1",
+      "is_self": false
+    },
+    {
+      "generator": "nvidia/Llama-3.1-Nemotron-Nano-8B-v1",
+      "evaluator": "mistralai/Magistral-Small-2506",
+      "is_self": false
+    },
+    {
+      "generator": "mistralai/Magistral-Small-2506",
+      "evaluator": "deepseek-ai/DeepSeek-R1-Distill-Llama-8B",
+      "is_self": false
+    },
+    {
+      "generator": "openai/gpt-oss-20b",
+      "evaluator": "Qwen/Qwen3-14B",
+      "is_self": false
+    },
+    {
+      "generator": "microsoft/Phi-4-reasoning-plus",
+      "evaluator": "Qwen/Qwen3-32B",
+      "is_self": false
+    },
+    {
+      "generator": "deepseek-ai/DeepSeek-R1-Distill-Qwen-32B",
+      "evaluator": "deepseek-ai/DeepSeek-R1-Distill-Qwen-14B",
+      "is_self": false
+    },
+    {
+      "generator": "microsoft/Phi-4-reasoning",
+      "evaluator": "Qwen/Qwen3-8B",
+      "is_self": false
+    },
+    {
+      "generator": "Qwen/Qwen3-14B",
+      "evaluator": "allenai/Olmo-3.1-32B-Think",
+      "is_self": false
+    },
+    {
+      "generator": "deepseek-ai/DeepSeek-R1-Distill-Qwen-14B",
+      "evaluator": "microsoft/Phi-4-reasoning-plus",
+      "is_self": false
+    },
+    {
+      "generator": "nvidia/Llama-3.1-Nemotron-Nano-8B-v1",
+      "evaluator": "microsoft/Phi-4-reasoning",
+      "is_self": false
+    },
+    {
+      "generator": "Qwen/Qwen3-32B",
+      "evaluator": "openai/gpt-oss-20b",
+      "is_self": false
+    },
+    {
+      "generator": "Qwen/Qwen3-8B",
+      "evaluator": "deepseek-ai/DeepSeek-R1-Distill-Qwen-32B",
+      "is_self": false
+    },
+    {
+      "generator": "allenai/Olmo-3.1-32B-Think",
+      "evaluator": "deepseek-ai/DeepSeek-R1-Distill-Llama-8B",
+      "is_self": false
+    },
+    {
+      "generator": "microsoft/Phi-4-reasoning-plus",
+      "evaluator": "nvidia/Llama-3.1-Nemotron-Nano-8B-v1",
+      "is_self": false
+    },
+    {
+      "generator": "Qwen/Qwen3-14B",
+      "evaluator": "deepseek-ai/DeepSeek-R1-Distill-Qwen-32B",
+      "is_self": false
+    },
+    {
+      "generator": "microsoft/Phi-4-reasoning",
+      "evaluator": "openai/gpt-oss-20b",
+      "is_self": false
+    },
+    {
+      "generator": "mistralai/Magistral-Small-2506",
+      "evaluator": "deepseek-ai/DeepSeek-R1-Distill-Qwen-14B",
+      "is_self": false
+    },
+    {
+      "generator": "deepseek-ai/DeepSeek-R1-Distill-Qwen-14B",
+      "evaluator": "Qwen/Qwen3-14B",
+      "is_self": false
+    },
+    {
+      "generator": "allenai/Olmo-3.1-32B-Think",
+      "evaluator": "Qwen/Qwen3-32B",
+      "is_self": false
+    },
+    {
+      "generator": "deepseek-ai/DeepSeek-R1-Distill-Llama-8B",
+      "evaluator": "Qwen/Qwen3-8B",
+      "is_self": false
+    },
+    {
+      "generator": "openai/gpt-oss-20b",
+      "evaluator": "mistralai/Magistral-Small-2506",
+      "is_self": false
+    },
+    {
+      "generator": "deepseek-ai/DeepSeek-R1-Distill-Qwen-32B",
+      "evaluator": "microsoft/Phi-4-reasoning",
+      "is_self": false
+    },
+    {
+      "generator": "Qwen/Qwen3-8B",
+      "evaluator": "microsoft/Phi-4-reasoning-plus",
+      "is_self": false
+    },
+    {
+      "generator": "Qwen/Qwen3-32B",
+      "evaluator": "allenai/Olmo-3.1-32B-Think",
+      "is_self": false
+    },
+    {
+      "generator": "deepseek-ai/DeepSeek-R1-Distill-Qwen-32B",
+      "evaluator": "Qwen/Qwen3-32B",
+      "is_self": false
+    },
+    {
+      "generator": "nvidia/Llama-3.1-Nemotron-Nano-8B-v1",
+      "evaluator": "allenai/Olmo-3.1-32B-Think",
+      "is_self": false
+    },
+    {
+      "generator": "deepseek-ai/DeepSeek-R1-Distill-Llama-8B",
+      "evaluator": "Qwen/Qwen3-14B",
+      "is_self": false
+    },
+    {
+      "generator": "Qwen/Qwen3-8B",
+      "evaluator": "mistralai/Magistral-Small-2506",
+      "is_self": false
+    },
+    {
+      "generator": "deepseek-ai/DeepSeek-R1-Distill-Qwen-14B",
+      "evaluator": "openai/gpt-oss-20b",
+      "is_self": false
+    },
+    {
+      "generator": "microsoft/Phi-4-reasoning",
+      "evaluator": "deepseek-ai/DeepSeek-R1-Distill-Llama-8B",
+      "is_self": false
+    },
+    {
+      "generator": "Qwen/Qwen3-32B",
+      "evaluator": "Qwen/Qwen3-8B",
+      "is_self": false
+    },
+    {
+      "generator": "allenai/Olmo-3.1-32B-Think",
+      "evaluator": "microsoft/Phi-4-reasoning-plus",
+      "is_self": false
+    },
+    {
+      "generator": "microsoft/Phi-4-reasoning-plus",
+      "evaluator": "deepseek-ai/DeepSeek-R1-Distill-Qwen-14B",
+      "is_self": false
+    },
+    {
+      "generator": "openai/gpt-oss-20b",
+      "evaluator": "deepseek-ai/DeepSeek-R1-Distill-Qwen-32B",
+      "is_self": false
+    },
+    {
+      "generator": "Qwen/Qwen3-14B",
+      "evaluator": "nvidia/Llama-3.1-Nemotron-Nano-8B-v1",
+      "is_self": false
+    },
+    {
+      "generator": "mistralai/Magistral-Small-2506",
+      "evaluator": "microsoft/Phi-4-reasoning",
+      "is_self": false
+    }
+  ],
+  "runs": [
+    {
+      "dataset": "gsm8k",
+      "generator": "Qwen/Qwen3-32B",
+      "evaluator": "Qwen/Qwen3-32B"
+    },
+    {
+      "dataset": "gsm8k",
+      "generator": "deepseek-ai/DeepSeek-R1-Distill-Qwen-32B",
+      "evaluator": "deepseek-ai/DeepSeek-R1-Distill-Qwen-32B"
+    },
+    {
+      "dataset": "gsm8k",
+      "generator": "allenai/Olmo-3.1-32B-Think",
+      "evaluator": "allenai/Olmo-3.1-32B-Think"
+    },
+    {
+      "dataset": "gsm8k",
+      "generator": "microsoft/Phi-4-reasoning",
+      "evaluator": "microsoft/Phi-4-reasoning"
+    },
+    {
+      "dataset": "gsm8k",
+      "generator": "deepseek-ai/DeepSeek-R1-Distill-Qwen-14B",
+      "evaluator": "deepseek-ai/DeepSeek-R1-Distill-Qwen-14B"
+    },
+    {
+      "dataset": "gsm8k",
+      "generator": "deepseek-ai/DeepSeek-R1-Distill-Llama-8B",
+      "evaluator": "deepseek-ai/DeepSeek-R1-Distill-Llama-8B"
+    },
+    {
+      "dataset": "gsm8k",
+      "generator": "Qwen/Qwen3-14B",
+      "evaluator": "Qwen/Qwen3-14B"
+    },
+    {
+      "dataset": "gsm8k",
+      "generator": "Qwen/Qwen3-8B",
+      "evaluator": "Qwen/Qwen3-8B"
+    },
+    {
+      "dataset": "gsm8k",
+      "generator": "microsoft/Phi-4-reasoning-plus",
+      "evaluator": "microsoft/Phi-4-reasoning-plus"
+    },
+    {
+      "dataset": "gsm8k",
+      "generator": "openai/gpt-oss-20b",
+      "evaluator": "openai/gpt-oss-20b"
+    },
+    {
+      "dataset": "gsm8k",
+      "generator": "mistralai/Magistral-Small-2506",
+      "evaluator": "mistralai/Magistral-Small-2506"
+    },
+    {
+      "dataset": "gsm8k",
+      "generator": "nvidia/Llama-3.1-Nemotron-Nano-8B-v1",
+      "evaluator": "nvidia/Llama-3.1-Nemotron-Nano-8B-v1"
+    },
+    {
+      "dataset": "gsm8k",
+      "generator": "deepseek-ai/DeepSeek-R1-Distill-Llama-8B",
+      "evaluator": "nvidia/Llama-3.1-Nemotron-Nano-8B-v1"
+    },
+    {
+      "dataset": "gsm8k",
+      "generator": "nvidia/Llama-3.1-Nemotron-Nano-8B-v1",
+      "evaluator": "mistralai/Magistral-Small-2506"
+    },
+    {
+      "dataset": "gsm8k",
+      "generator": "mistralai/Magistral-Small-2506",
+      "evaluator": "deepseek-ai/DeepSeek-R1-Distill-Llama-8B"
+    },
+    {
+      "dataset": "gsm8k",
+      "generator": "openai/gpt-oss-20b",
+      "evaluator": "Qwen/Qwen3-14B"
+    },
+    {
+      "dataset": "gsm8k",
+      "generator": "microsoft/Phi-4-reasoning-plus",
+      "evaluator": "Qwen/Qwen3-32B"
+    },
+    {
+      "dataset": "gsm8k",
+      "generator": "deepseek-ai/DeepSeek-R1-Distill-Qwen-32B",
+      "evaluator": "deepseek-ai/DeepSeek-R1-Distill-Qwen-14B"
+    },
+    {
+      "dataset": "gsm8k",
+      "generator": "microsoft/Phi-4-reasoning",
+      "evaluator": "Qwen/Qwen3-8B"
+    },
+    {
+      "dataset": "gsm8k",
+      "generator": "Qwen/Qwen3-14B",
+      "evaluator": "allenai/Olmo-3.1-32B-Think"
+    },
+    {
+      "dataset": "gsm8k",
+      "generator": "deepseek-ai/DeepSeek-R1-Distill-Qwen-14B",
+      "evaluator": "microsoft/Phi-4-reasoning-plus"
+    },
+    {
+      "dataset": "gsm8k",
+      "generator": "nvidia/Llama-3.1-Nemotron-Nano-8B-v1",
+      "evaluator": "microsoft/Phi-4-reasoning"
+    },
+    {
+      "dataset": "gsm8k",
+      "generator": "Qwen/Qwen3-32B",
+      "evaluator": "openai/gpt-oss-20b"
+    },
+    {
+      "dataset": "gsm8k",
+      "generator": "Qwen/Qwen3-8B",
+      "evaluator": "deepseek-ai/DeepSeek-R1-Distill-Qwen-32B"
+    },
+    {
+      "dataset": "gsm8k",
+      "generator": "allenai/Olmo-3.1-32B-Think",
+      "evaluator": "deepseek-ai/DeepSeek-R1-Distill-Llama-8B"
+    },
+    {
+      "dataset": "gsm8k",
+      "generator": "microsoft/Phi-4-reasoning-plus",
+      "evaluator": "nvidia/Llama-3.1-Nemotron-Nano-8B-v1"
+    },
+    {
+      "dataset": "gsm8k",
+      "generator": "Qwen/Qwen3-14B",
+      "evaluator": "deepseek-ai/DeepSeek-R1-Distill-Qwen-32B"
+    },
+    {
+      "dataset": "gsm8k",
+      "generator": "microsoft/Phi-4-reasoning",
+      "evaluator": "openai/gpt-oss-20b"
+    },
+    {
+      "dataset": "gsm8k",
+      "generator": "mistralai/Magistral-Small-2506",
+      "evaluator": "deepseek-ai/DeepSeek-R1-Distill-Qwen-14B"
+    },
+    {
+      "dataset": "gsm8k",
+      "generator": "deepseek-ai/DeepSeek-R1-Distill-Qwen-14B",
+      "evaluator": "Qwen/Qwen3-14B"
+    },
+    {
+      "dataset": "gsm8k",
+      "generator": "allenai/Olmo-3.1-32B-Think",
+      "evaluator": "Qwen/Qwen3-32B"
+    },
+    {
+      "dataset": "gsm8k",
+      "generator": "deepseek-ai/DeepSeek-R1-Distill-Llama-8B",
+      "evaluator": "Qwen/Qwen3-8B"
+    },
+    {
+      "dataset": "gsm8k",
+      "generator": "openai/gpt-oss-20b",
+      "evaluator": "mistralai/Magistral-Small-2506"
+    },
+    {
+      "dataset": "gsm8k",
+      "generator": "deepseek-ai/DeepSeek-R1-Distill-Qwen-32B",
+      "evaluator": "microsoft/Phi-4-reasoning"
+    },
+    {
+      "dataset": "gsm8k",
+      "generator": "Qwen/Qwen3-8B",
+      "evaluator": "microsoft/Phi-4-reasoning-plus"
+    },
+    {
+      "dataset": "gsm8k",
+      "generator": "Qwen/Qwen3-32B",
+      "evaluator": "allenai/Olmo-3.1-32B-Think"
+    },
+    {
+      "dataset": "gsm8k",
+      "generator": "deepseek-ai/DeepSeek-R1-Distill-Qwen-32B",
+      "evaluator": "Qwen/Qwen3-32B"
+    },
+    {
+      "dataset": "gsm8k",
+      "generator": "nvidia/Llama-3.1-Nemotron-Nano-8B-v1",
+      "evaluator": "allenai/Olmo-3.1-32B-Think"
+    },
+    {
+      "dataset": "gsm8k",
+      "generator": "deepseek-ai/DeepSeek-R1-Distill-Llama-8B",
+      "evaluator": "Qwen/Qwen3-14B"
+    },
+    {
+      "dataset": "gsm8k",
+      "generator": "Qwen/Qwen3-8B",
+      "evaluator": "mistralai/Magistral-Small-2506"
+    },
+    {
+      "dataset": "gsm8k",
+      "generator": "deepseek-ai/DeepSeek-R1-Distill-Qwen-14B",
+      "evaluator": "openai/gpt-oss-20b"
+    },
+    {
+      "dataset": "gsm8k",
+      "generator": "microsoft/Phi-4-reasoning",
+      "evaluator": "deepseek-ai/DeepSeek-R1-Distill-Llama-8B"
+    },
+    {
+      "dataset": "gsm8k",
+      "generator": "Qwen/Qwen3-32B",
+      "evaluator": "Qwen/Qwen3-8B"
+    },
+    {
+      "dataset": "gsm8k",
+      "generator": "allenai/Olmo-3.1-32B-Think",
+      "evaluator": "microsoft/Phi-4-reasoning-plus"
+    },
+    {
+      "dataset": "gsm8k",
+      "generator": "microsoft/Phi-4-reasoning-plus",
+      "evaluator": "deepseek-ai/DeepSeek-R1-Distill-Qwen-14B"
+    },
+    {
+      "dataset": "gsm8k",
+      "generator": "openai/gpt-oss-20b",
+      "evaluator": "deepseek-ai/DeepSeek-R1-Distill-Qwen-32B"
+    },
+    {
+      "dataset": "gsm8k",
+      "generator": "Qwen/Qwen3-14B",
+      "evaluator": "nvidia/Llama-3.1-Nemotron-Nano-8B-v1"
+    },
+    {
+      "dataset": "gsm8k",
+      "generator": "mistralai/Magistral-Small-2506",
+      "evaluator": "microsoft/Phi-4-reasoning"
+    },
+    {
+      "dataset": "math500",
+      "generator": "Qwen/Qwen3-32B",
+      "evaluator": "Qwen/Qwen3-32B"
+    },
+    {
+      "dataset": "math500",
+      "generator": "deepseek-ai/DeepSeek-R1-Distill-Qwen-32B",
+      "evaluator": "deepseek-ai/DeepSeek-R1-Distill-Qwen-32B"
+    },
+    {
+      "dataset": "math500",
+      "generator": "allenai/Olmo-3.1-32B-Think",
+      "evaluator": "allenai/Olmo-3.1-32B-Think"
+    },
+    {
+      "dataset": "math500",
+      "generator": "microsoft/Phi-4-reasoning",
+      "evaluator": "microsoft/Phi-4-reasoning"
+    },
+    {
+      "dataset": "math500",
+      "generator": "deepseek-ai/DeepSeek-R1-Distill-Qwen-14B",
+      "evaluator": "deepseek-ai/DeepSeek-R1-Distill-Qwen-14B"
+    },
+    {
+      "dataset": "math500",
+      "generator": "deepseek-ai/DeepSeek-R1-Distill-Llama-8B",
+      "evaluator": "deepseek-ai/DeepSeek-R1-Distill-Llama-8B"
+    },
+    {
+      "dataset": "math500",
+      "generator": "Qwen/Qwen3-14B",
+      "evaluator": "Qwen/Qwen3-14B"
+    },
+    {
+      "dataset": "math500",
+      "generator": "Qwen/Qwen3-8B",
+      "evaluator": "Qwen/Qwen3-8B"
+    },
+    {
+      "dataset": "math500",
+      "generator": "microsoft/Phi-4-reasoning-plus",
+      "evaluator": "microsoft/Phi-4-reasoning-plus"
+    },
+    {
+      "dataset": "math500",
+      "generator": "openai/gpt-oss-20b",
+      "evaluator": "openai/gpt-oss-20b"
+    },
+    {
+      "dataset": "math500",
+      "generator": "mistralai/Magistral-Small-2506",
+      "evaluator": "mistralai/Magistral-Small-2506"
+    },
+    {
+      "dataset": "math500",
+      "generator": "nvidia/Llama-3.1-Nemotron-Nano-8B-v1",
+      "evaluator": "nvidia/Llama-3.1-Nemotron-Nano-8B-v1"
+    },
+    {
+      "dataset": "math500",
+      "generator": "deepseek-ai/DeepSeek-R1-Distill-Llama-8B",
+      "evaluator": "nvidia/Llama-3.1-Nemotron-Nano-8B-v1"
+    },
+    {
+      "dataset": "math500",
+      "generator": "nvidia/Llama-3.1-Nemotron-Nano-8B-v1",
+      "evaluator": "mistralai/Magistral-Small-2506"
+    },
+    {
+      "dataset": "math500",
+      "generator": "mistralai/Magistral-Small-2506",
+      "evaluator": "deepseek-ai/DeepSeek-R1-Distill-Llama-8B"
+    },
+    {
+      "dataset": "math500",
+      "generator": "openai/gpt-oss-20b",
+      "evaluator": "Qwen/Qwen3-14B"
+    },
+    {
+      "dataset": "math500",
+      "generator": "microsoft/Phi-4-reasoning-plus",
+      "evaluator": "Qwen/Qwen3-32B"
+    },
+    {
+      "dataset": "math500",
+      "generator": "deepseek-ai/DeepSeek-R1-Distill-Qwen-32B",
+      "evaluator": "deepseek-ai/DeepSeek-R1-Distill-Qwen-14B"
+    },
+    {
+      "dataset": "math500",
+      "generator": "microsoft/Phi-4-reasoning",
+      "evaluator": "Qwen/Qwen3-8B"
+    },
+    {
+      "dataset": "math500",
+      "generator": "Qwen/Qwen3-14B",
+      "evaluator": "allenai/Olmo-3.1-32B-Think"
+    },
+    {
+      "dataset": "math500",
+      "generator": "deepseek-ai/DeepSeek-R1-Distill-Qwen-14B",
+      "evaluator": "microsoft/Phi-4-reasoning-plus"
+    },
+    {
+      "dataset": "math500",
+      "generator": "nvidia/Llama-3.1-Nemotron-Nano-8B-v1",
+      "evaluator": "microsoft/Phi-4-reasoning"
+    },
+    {
+      "dataset": "math500",
+      "generator": "Qwen/Qwen3-32B",
+      "evaluator": "openai/gpt-oss-20b"
+    },
+    {
+      "dataset": "math500",
+      "generator": "Qwen/Qwen3-8B",
+      "evaluator": "deepseek-ai/DeepSeek-R1-Distill-Qwen-32B"
+    },
+    {
+      "dataset": "math500",
+      "generator": "allenai/Olmo-3.1-32B-Think",
+      "evaluator": "deepseek-ai/DeepSeek-R1-Distill-Llama-8B"
+    },
+    {
+      "dataset": "math500",
+      "generator": "microsoft/Phi-4-reasoning-plus",
+      "evaluator": "nvidia/Llama-3.1-Nemotron-Nano-8B-v1"
+    },
+    {
+      "dataset": "math500",
+      "generator": "Qwen/Qwen3-14B",
+      "evaluator": "deepseek-ai/DeepSeek-R1-Distill-Qwen-32B"
+    },
+    {
+      "dataset": "math500",
+      "generator": "microsoft/Phi-4-reasoning",
+      "evaluator": "openai/gpt-oss-20b"
+    },
+    {
+      "dataset": "math500",
+      "generator": "mistralai/Magistral-Small-2506",
+      "evaluator": "deepseek-ai/DeepSeek-R1-Distill-Qwen-14B"
+    },
+    {
+      "dataset": "math500",
+      "generator": "deepseek-ai/DeepSeek-R1-Distill-Qwen-14B",
+      "evaluator": "Qwen/Qwen3-14B"
+    },
+    {
+      "dataset": "math500",
+      "generator": "allenai/Olmo-3.1-32B-Think",
+      "evaluator": "Qwen/Qwen3-32B"
+    },
+    {
+      "dataset": "math500",
+      "generator": "deepseek-ai/DeepSeek-R1-Distill-Llama-8B",
+      "evaluator": "Qwen/Qwen3-8B"
+    },
+    {
+      "dataset": "math500",
+      "generator": "openai/gpt-oss-20b",
+      "evaluator": "mistralai/Magistral-Small-2506"
+    },
+    {
+      "dataset": "math500",
+      "generator": "deepseek-ai/DeepSeek-R1-Distill-Qwen-32B",
+      "evaluator": "microsoft/Phi-4-reasoning"
+    },
+    {
+      "dataset": "math500",
+      "generator": "Qwen/Qwen3-8B",
+      "evaluator": "microsoft/Phi-4-reasoning-plus"
+    },
+    {
+      "dataset": "math500",
+      "generator": "Qwen/Qwen3-32B",
+      "evaluator": "allenai/Olmo-3.1-32B-Think"
+    },
+    {
+      "dataset": "math500",
+      "generator": "deepseek-ai/DeepSeek-R1-Distill-Qwen-32B",
+      "evaluator": "Qwen/Qwen3-32B"
+    },
+    {
+      "dataset": "math500",
+      "generator": "nvidia/Llama-3.1-Nemotron-Nano-8B-v1",
+      "evaluator": "allenai/Olmo-3.1-32B-Think"
+    },
+    {
+      "dataset": "math500",
+      "generator": "deepseek-ai/DeepSeek-R1-Distill-Llama-8B",
+      "evaluator": "Qwen/Qwen3-14B"
+    },
+    {
+      "dataset": "math500",
+      "generator": "Qwen/Qwen3-8B",
+      "evaluator": "mistralai/Magistral-Small-2506"
+    },
+    {
+      "dataset": "math500",
+      "generator": "deepseek-ai/DeepSeek-R1-Distill-Qwen-14B",
+      "evaluator": "openai/gpt-oss-20b"
+    },
+    {
+      "dataset": "math500",
+      "generator": "microsoft/Phi-4-reasoning",
+      "evaluator": "deepseek-ai/DeepSeek-R1-Distill-Llama-8B"
+    },
+    {
+      "dataset": "math500",
+      "generator": "Qwen/Qwen3-32B",
+      "evaluator": "Qwen/Qwen3-8B"
+    },
+    {
+      "dataset": "math500",
+      "generator": "allenai/Olmo-3.1-32B-Think",
+      "evaluator": "microsoft/Phi-4-reasoning-plus"
+    },
+    {
+      "dataset": "math500",
+      "generator": "microsoft/Phi-4-reasoning-plus",
+      "evaluator": "deepseek-ai/DeepSeek-R1-Distill-Qwen-14B"
+    },
+    {
+      "dataset": "math500",
+      "generator": "openai/gpt-oss-20b",
+      "evaluator": "deepseek-ai/DeepSeek-R1-Distill-Qwen-32B"
+    },
+    {
+      "dataset": "math500",
+      "generator": "Qwen/Qwen3-14B",
+      "evaluator": "nvidia/Llama-3.1-Nemotron-Nano-8B-v1"
+    },
+    {
+      "dataset": "math500",
+      "generator": "mistralai/Magistral-Small-2506",
+      "evaluator": "microsoft/Phi-4-reasoning"
+    },
+    {
+      "dataset": "aime",
+      "generator": "Qwen/Qwen3-32B",
+      "evaluator": "Qwen/Qwen3-32B"
+    },
+    {
+      "dataset": "aime",
+      "generator": "deepseek-ai/DeepSeek-R1-Distill-Qwen-32B",
+      "evaluator": "deepseek-ai/DeepSeek-R1-Distill-Qwen-32B"
+    },
+    {
+      "dataset": "aime",
+      "generator": "allenai/Olmo-3.1-32B-Think",
+      "evaluator": "allenai/Olmo-3.1-32B-Think"
+    },
+    {
+      "dataset": "aime",
+      "generator": "microsoft/Phi-4-reasoning",
+      "evaluator": "microsoft/Phi-4-reasoning"
+    },
+    {
+      "dataset": "aime",
+      "generator": "deepseek-ai/DeepSeek-R1-Distill-Qwen-14B",
+      "evaluator": "deepseek-ai/DeepSeek-R1-Distill-Qwen-14B"
+    },
+    {
+      "dataset": "aime",
+      "generator": "deepseek-ai/DeepSeek-R1-Distill-Llama-8B",
+      "evaluator": "deepseek-ai/DeepSeek-R1-Distill-Llama-8B"
+    },
+    {
+      "dataset": "aime",
+      "generator": "Qwen/Qwen3-14B",
+      "evaluator": "Qwen/Qwen3-14B"
+    },
+    {
+      "dataset": "aime",
+      "generator": "Qwen/Qwen3-8B",
+      "evaluator": "Qwen/Qwen3-8B"
+    },
+    {
+      "dataset": "aime",
+      "generator": "microsoft/Phi-4-reasoning-plus",
+      "evaluator": "microsoft/Phi-4-reasoning-plus"
+    },
+    {
+      "dataset": "aime",
+      "generator": "openai/gpt-oss-20b",
+      "evaluator": "openai/gpt-oss-20b"
+    },
+    {
+      "dataset": "aime",
+      "generator": "mistralai/Magistral-Small-2506",
+      "evaluator": "mistralai/Magistral-Small-2506"
+    },
+    {
+      "dataset": "aime",
+      "generator": "nvidia/Llama-3.1-Nemotron-Nano-8B-v1",
+      "evaluator": "nvidia/Llama-3.1-Nemotron-Nano-8B-v1"
+    },
+    {
+      "dataset": "aime",
+      "generator": "deepseek-ai/DeepSeek-R1-Distill-Llama-8B",
+      "evaluator": "nvidia/Llama-3.1-Nemotron-Nano-8B-v1"
+    },
+    {
+      "dataset": "aime",
+      "generator": "nvidia/Llama-3.1-Nemotron-Nano-8B-v1",
+      "evaluator": "mistralai/Magistral-Small-2506"
+    },
+    {
+      "dataset": "aime",
+      "generator": "mistralai/Magistral-Small-2506",
+      "evaluator": "deepseek-ai/DeepSeek-R1-Distill-Llama-8B"
+    },
+    {
+      "dataset": "aime",
+      "generator": "openai/gpt-oss-20b",
+      "evaluator": "Qwen/Qwen3-14B"
+    },
+    {
+      "dataset": "aime",
+      "generator": "microsoft/Phi-4-reasoning-plus",
+      "evaluator": "Qwen/Qwen3-32B"
+    },
+    {
+      "dataset": "aime",
+      "generator": "deepseek-ai/DeepSeek-R1-Distill-Qwen-32B",
+      "evaluator": "deepseek-ai/DeepSeek-R1-Distill-Qwen-14B"
+    },
+    {
+      "dataset": "aime",
+      "generator": "microsoft/Phi-4-reasoning",
+      "evaluator": "Qwen/Qwen3-8B"
+    },
+    {
+      "dataset": "aime",
+      "generator": "Qwen/Qwen3-14B",
+      "evaluator": "allenai/Olmo-3.1-32B-Think"
+    },
+    {
+      "dataset": "aime",
+      "generator": "deepseek-ai/DeepSeek-R1-Distill-Qwen-14B",
+      "evaluator": "microsoft/Phi-4-reasoning-plus"
+    },
+    {
+      "dataset": "aime",
+      "generator": "nvidia/Llama-3.1-Nemotron-Nano-8B-v1",
+      "evaluator": "microsoft/Phi-4-reasoning"
+    },
+    {
+      "dataset": "aime",
+      "generator": "Qwen/Qwen3-32B",
+      "evaluator": "openai/gpt-oss-20b"
+    },
+    {
+      "dataset": "aime",
+      "generator": "Qwen/Qwen3-8B",
+      "evaluator": "deepseek-ai/DeepSeek-R1-Distill-Qwen-32B"
+    },
+    {
+      "dataset": "aime",
+      "generator": "allenai/Olmo-3.1-32B-Think",
+      "evaluator": "deepseek-ai/DeepSeek-R1-Distill-Llama-8B"
+    },
+    {
+      "dataset": "aime",
+      "generator": "microsoft/Phi-4-reasoning-plus",
+      "evaluator": "nvidia/Llama-3.1-Nemotron-Nano-8B-v1"
+    },
+    {
+      "dataset": "aime",
+      "generator": "Qwen/Qwen3-14B",
+      "evaluator": "deepseek-ai/DeepSeek-R1-Distill-Qwen-32B"
+    },
+    {
+      "dataset": "aime",
+      "generator": "microsoft/Phi-4-reasoning",
+      "evaluator": "openai/gpt-oss-20b"
+    },
+    {
+      "dataset": "aime",
+      "generator": "mistralai/Magistral-Small-2506",
+      "evaluator": "deepseek-ai/DeepSeek-R1-Distill-Qwen-14B"
+    },
+    {
+      "dataset": "aime",
+      "generator": "deepseek-ai/DeepSeek-R1-Distill-Qwen-14B",
+      "evaluator": "Qwen/Qwen3-14B"
+    },
+    {
+      "dataset": "aime",
+      "generator": "allenai/Olmo-3.1-32B-Think",
+      "evaluator": "Qwen/Qwen3-32B"
+    },
+    {
+      "dataset": "aime",
+      "generator": "deepseek-ai/DeepSeek-R1-Distill-Llama-8B",
+      "evaluator": "Qwen/Qwen3-8B"
+    },
+    {
+      "dataset": "aime",
+      "generator": "openai/gpt-oss-20b",
+      "evaluator": "mistralai/Magistral-Small-2506"
+    },
+    {
+      "dataset": "aime",
+      "generator": "deepseek-ai/DeepSeek-R1-Distill-Qwen-32B",
+      "evaluator": "microsoft/Phi-4-reasoning"
+    },
+    {
+      "dataset": "aime",
+      "generator": "Qwen/Qwen3-8B",
+      "evaluator": "microsoft/Phi-4-reasoning-plus"
+    },
+    {
+      "dataset": "aime",
+      "generator": "Qwen/Qwen3-32B",
+      "evaluator": "allenai/Olmo-3.1-32B-Think"
+    },
+    {
+      "dataset": "aime",
+      "generator": "deepseek-ai/DeepSeek-R1-Distill-Qwen-32B",
+      "evaluator": "Qwen/Qwen3-32B"
+    },
+    {
+      "dataset": "aime",
+      "generator": "nvidia/Llama-3.1-Nemotron-Nano-8B-v1",
+      "evaluator": "allenai/Olmo-3.1-32B-Think"
+    },
+    {
+      "dataset": "aime",
+      "generator": "deepseek-ai/DeepSeek-R1-Distill-Llama-8B",
+      "evaluator": "Qwen/Qwen3-14B"
+    },
+    {
+      "dataset": "aime",
+      "generator": "Qwen/Qwen3-8B",
+      "evaluator": "mistralai/Magistral-Small-2506"
+    },
+    {
+      "dataset": "aime",
+      "generator": "deepseek-ai/DeepSeek-R1-Distill-Qwen-14B",
+      "evaluator": "openai/gpt-oss-20b"
+    },
+    {
+      "dataset": "aime",
+      "generator": "microsoft/Phi-4-reasoning",
+      "evaluator": "deepseek-ai/DeepSeek-R1-Distill-Llama-8B"
+    },
+    {
+      "dataset": "aime",
+      "generator": "Qwen/Qwen3-32B",
+      "evaluator": "Qwen/Qwen3-8B"
+    },
+    {
+      "dataset": "aime",
+      "generator": "allenai/Olmo-3.1-32B-Think",
+      "evaluator": "microsoft/Phi-4-reasoning-plus"
+    },
+    {
+      "dataset": "aime",
+      "generator": "microsoft/Phi-4-reasoning-plus",
+      "evaluator": "deepseek-ai/DeepSeek-R1-Distill-Qwen-14B"
+    },
+    {
+      "dataset": "aime",
+      "generator": "openai/gpt-oss-20b",
+      "evaluator": "deepseek-ai/DeepSeek-R1-Distill-Qwen-32B"
+    },
+    {
+      "dataset": "aime",
+      "generator": "Qwen/Qwen3-14B",
+      "evaluator": "nvidia/Llama-3.1-Nemotron-Nano-8B-v1"
+    },
+    {
+      "dataset": "aime",
+      "generator": "mistralai/Magistral-Small-2506",
+      "evaluator": "microsoft/Phi-4-reasoning"
+    },
+    {
+      "dataset": "gpqa_diamond",
+      "generator": "Qwen/Qwen3-32B",
+      "evaluator": "Qwen/Qwen3-32B"
+    },
+    {
+      "dataset": "gpqa_diamond",
+      "generator": "deepseek-ai/DeepSeek-R1-Distill-Qwen-32B",
+      "evaluator": "deepseek-ai/DeepSeek-R1-Distill-Qwen-32B"
+    },
+    {
+      "dataset": "gpqa_diamond",
+      "generator": "allenai/Olmo-3.1-32B-Think",
+      "evaluator": "allenai/Olmo-3.1-32B-Think"
+    },
+    {
+      "dataset": "gpqa_diamond",
+      "generator": "microsoft/Phi-4-reasoning",
+      "evaluator": "microsoft/Phi-4-reasoning"
+    },
+    {
+      "dataset": "gpqa_diamond",
+      "generator": "deepseek-ai/DeepSeek-R1-Distill-Qwen-14B",
+      "evaluator": "deepseek-ai/DeepSeek-R1-Distill-Qwen-14B"
+    },
+    {
+      "dataset": "gpqa_diamond",
+      "generator": "deepseek-ai/DeepSeek-R1-Distill-Llama-8B",
+      "evaluator": "deepseek-ai/DeepSeek-R1-Distill-Llama-8B"
+    },
+    {
+      "dataset": "gpqa_diamond",
+      "generator": "Qwen/Qwen3-14B",
+      "evaluator": "Qwen/Qwen3-14B"
+    },
+    {
+      "dataset": "gpqa_diamond",
+      "generator": "Qwen/Qwen3-8B",
+      "evaluator": "Qwen/Qwen3-8B"
+    },
+    {
+      "dataset": "gpqa_diamond",
+      "generator": "microsoft/Phi-4-reasoning-plus",
+      "evaluator": "microsoft/Phi-4-reasoning-plus"
+    },
+    {
+      "dataset": "gpqa_diamond",
+      "generator": "openai/gpt-oss-20b",
+      "evaluator": "openai/gpt-oss-20b"
+    },
+    {
+      "dataset": "gpqa_diamond",
+      "generator": "mistralai/Magistral-Small-2506",
+      "evaluator": "mistralai/Magistral-Small-2506"
+    },
+    {
+      "dataset": "gpqa_diamond",
+      "generator": "nvidia/Llama-3.1-Nemotron-Nano-8B-v1",
+      "evaluator": "nvidia/Llama-3.1-Nemotron-Nano-8B-v1"
+    },
+    {
+      "dataset": "gpqa_diamond",
+      "generator": "deepseek-ai/DeepSeek-R1-Distill-Llama-8B",
+      "evaluator": "nvidia/Llama-3.1-Nemotron-Nano-8B-v1"
+    },
+    {
+      "dataset": "gpqa_diamond",
+      "generator": "nvidia/Llama-3.1-Nemotron-Nano-8B-v1",
+      "evaluator": "mistralai/Magistral-Small-2506"
+    },
+    {
+      "dataset": "gpqa_diamond",
+      "generator": "mistralai/Magistral-Small-2506",
+      "evaluator": "deepseek-ai/DeepSeek-R1-Distill-Llama-8B"
+    },
+    {
+      "dataset": "gpqa_diamond",
+      "generator": "openai/gpt-oss-20b",
+      "evaluator": "Qwen/Qwen3-14B"
+    },
+    {
+      "dataset": "gpqa_diamond",
+      "generator": "microsoft/Phi-4-reasoning-plus",
+      "evaluator": "Qwen/Qwen3-32B"
+    },
+    {
+      "dataset": "gpqa_diamond",
+      "generator": "deepseek-ai/DeepSeek-R1-Distill-Qwen-32B",
+      "evaluator": "deepseek-ai/DeepSeek-R1-Distill-Qwen-14B"
+    },
+    {
+      "dataset": "gpqa_diamond",
+      "generator": "microsoft/Phi-4-reasoning",
+      "evaluator": "Qwen/Qwen3-8B"
+    },
+    {
+      "dataset": "gpqa_diamond",
+      "generator": "Qwen/Qwen3-14B",
+      "evaluator": "allenai/Olmo-3.1-32B-Think"
+    },
+    {
+      "dataset": "gpqa_diamond",
+      "generator": "deepseek-ai/DeepSeek-R1-Distill-Qwen-14B",
+      "evaluator": "microsoft/Phi-4-reasoning-plus"
+    },
+    {
+      "dataset": "gpqa_diamond",
+      "generator": "nvidia/Llama-3.1-Nemotron-Nano-8B-v1",
+      "evaluator": "microsoft/Phi-4-reasoning"
+    },
+    {
+      "dataset": "gpqa_diamond",
+      "generator": "Qwen/Qwen3-32B",
+      "evaluator": "openai/gpt-oss-20b"
+    },
+    {
+      "dataset": "gpqa_diamond",
+      "generator": "Qwen/Qwen3-8B",
+      "evaluator": "deepseek-ai/DeepSeek-R1-Distill-Qwen-32B"
+    },
+    {
+      "dataset": "gpqa_diamond",
+      "generator": "allenai/Olmo-3.1-32B-Think",
+      "evaluator": "deepseek-ai/DeepSeek-R1-Distill-Llama-8B"
+    },
+    {
+      "dataset": "gpqa_diamond",
+      "generator": "microsoft/Phi-4-reasoning-plus",
+      "evaluator": "nvidia/Llama-3.1-Nemotron-Nano-8B-v1"
+    },
+    {
+      "dataset": "gpqa_diamond",
+      "generator": "Qwen/Qwen3-14B",
+      "evaluator": "deepseek-ai/DeepSeek-R1-Distill-Qwen-32B"
+    },
+    {
+      "dataset": "gpqa_diamond",
+      "generator": "microsoft/Phi-4-reasoning",
+      "evaluator": "openai/gpt-oss-20b"
+    },
+    {
+      "dataset": "gpqa_diamond",
+      "generator": "mistralai/Magistral-Small-2506",
+      "evaluator": "deepseek-ai/DeepSeek-R1-Distill-Qwen-14B"
+    },
+    {
+      "dataset": "gpqa_diamond",
+      "generator": "deepseek-ai/DeepSeek-R1-Distill-Qwen-14B",
+      "evaluator": "Qwen/Qwen3-14B"
+    },
+    {
+      "dataset": "gpqa_diamond",
+      "generator": "allenai/Olmo-3.1-32B-Think",
+      "evaluator": "Qwen/Qwen3-32B"
+    },
+    {
+      "dataset": "gpqa_diamond",
+      "generator": "deepseek-ai/DeepSeek-R1-Distill-Llama-8B",
+      "evaluator": "Qwen/Qwen3-8B"
+    },
+    {
+      "dataset": "gpqa_diamond",
+      "generator": "openai/gpt-oss-20b",
+      "evaluator": "mistralai/Magistral-Small-2506"
+    },
+    {
+      "dataset": "gpqa_diamond",
+      "generator": "deepseek-ai/DeepSeek-R1-Distill-Qwen-32B",
+      "evaluator": "microsoft/Phi-4-reasoning"
+    },
+    {
+      "dataset": "gpqa_diamond",
+      "generator": "Qwen/Qwen3-8B",
+      "evaluator": "microsoft/Phi-4-reasoning-plus"
+    },
+    {
+      "dataset": "gpqa_diamond",
+      "generator": "Qwen/Qwen3-32B",
+      "evaluator": "allenai/Olmo-3.1-32B-Think"
+    },
+    {
+      "dataset": "gpqa_diamond",
+      "generator": "deepseek-ai/DeepSeek-R1-Distill-Qwen-32B",
+      "evaluator": "Qwen/Qwen3-32B"
+    },
+    {
+      "dataset": "gpqa_diamond",
+      "generator": "nvidia/Llama-3.1-Nemotron-Nano-8B-v1",
+      "evaluator": "allenai/Olmo-3.1-32B-Think"
+    },
+    {
+      "dataset": "gpqa_diamond",
+      "generator": "deepseek-ai/DeepSeek-R1-Distill-Llama-8B",
+      "evaluator": "Qwen/Qwen3-14B"
+    },
+    {
+      "dataset": "gpqa_diamond",
+      "generator": "Qwen/Qwen3-8B",
+      "evaluator": "mistralai/Magistral-Small-2506"
+    },
+    {
+      "dataset": "gpqa_diamond",
+      "generator": "deepseek-ai/DeepSeek-R1-Distill-Qwen-14B",
+      "evaluator": "openai/gpt-oss-20b"
+    },
+    {
+      "dataset": "gpqa_diamond",
+      "generator": "microsoft/Phi-4-reasoning",
+      "evaluator": "deepseek-ai/DeepSeek-R1-Distill-Llama-8B"
+    },
+    {
+      "dataset": "gpqa_diamond",
+      "generator": "Qwen/Qwen3-32B",
+      "evaluator": "Qwen/Qwen3-8B"
+    },
+    {
+      "dataset": "gpqa_diamond",
+      "generator": "allenai/Olmo-3.1-32B-Think",
+      "evaluator": "microsoft/Phi-4-reasoning-plus"
+    },
+    {
+      "dataset": "gpqa_diamond",
+      "generator": "microsoft/Phi-4-reasoning-plus",
+      "evaluator": "deepseek-ai/DeepSeek-R1-Distill-Qwen-14B"
+    },
+    {
+      "dataset": "gpqa_diamond",
+      "generator": "openai/gpt-oss-20b",
+      "evaluator": "deepseek-ai/DeepSeek-R1-Distill-Qwen-32B"
+    },
+    {
+      "dataset": "gpqa_diamond",
+      "generator": "Qwen/Qwen3-14B",
+      "evaluator": "nvidia/Llama-3.1-Nemotron-Nano-8B-v1"
+    },
+    {
+      "dataset": "gpqa_diamond",
+      "generator": "mistralai/Magistral-Small-2506",
+      "evaluator": "microsoft/Phi-4-reasoning"
+    },
+    {
+      "dataset": "mmlu_pro",
+      "generator": "Qwen/Qwen3-32B",
+      "evaluator": "Qwen/Qwen3-32B"
+    },
+    {
+      "dataset": "mmlu_pro",
+      "generator": "deepseek-ai/DeepSeek-R1-Distill-Qwen-32B",
+      "evaluator": "deepseek-ai/DeepSeek-R1-Distill-Qwen-32B"
+    },
+    {
+      "dataset": "mmlu_pro",
+      "generator": "allenai/Olmo-3.1-32B-Think",
+      "evaluator": "allenai/Olmo-3.1-32B-Think"
+    },
+    {
+      "dataset": "mmlu_pro",
+      "generator": "microsoft/Phi-4-reasoning",
+      "evaluator": "microsoft/Phi-4-reasoning"
+    },
+    {
+      "dataset": "mmlu_pro",
+      "generator": "deepseek-ai/DeepSeek-R1-Distill-Qwen-14B",
+      "evaluator": "deepseek-ai/DeepSeek-R1-Distill-Qwen-14B"
+    },
+    {
+      "dataset": "mmlu_pro",
+      "generator": "deepseek-ai/DeepSeek-R1-Distill-Llama-8B",
+      "evaluator": "deepseek-ai/DeepSeek-R1-Distill-Llama-8B"
+    },
+    {
+      "dataset": "mmlu_pro",
+      "generator": "Qwen/Qwen3-14B",
+      "evaluator": "Qwen/Qwen3-14B"
+    },
+    {
+      "dataset": "mmlu_pro",
+      "generator": "Qwen/Qwen3-8B",
+      "evaluator": "Qwen/Qwen3-8B"
+    },
+    {
+      "dataset": "mmlu_pro",
+      "generator": "microsoft/Phi-4-reasoning-plus",
+      "evaluator": "microsoft/Phi-4-reasoning-plus"
+    },
+    {
+      "dataset": "mmlu_pro",
+      "generator": "openai/gpt-oss-20b",
+      "evaluator": "openai/gpt-oss-20b"
+    },
+    {
+      "dataset": "mmlu_pro",
+      "generator": "mistralai/Magistral-Small-2506",
+      "evaluator": "mistralai/Magistral-Small-2506"
+    },
+    {
+      "dataset": "mmlu_pro",
+      "generator": "nvidia/Llama-3.1-Nemotron-Nano-8B-v1",
+      "evaluator": "nvidia/Llama-3.1-Nemotron-Nano-8B-v1"
+    },
+    {
+      "dataset": "mmlu_pro",
+      "generator": "deepseek-ai/DeepSeek-R1-Distill-Llama-8B",
+      "evaluator": "nvidia/Llama-3.1-Nemotron-Nano-8B-v1"
+    },
+    {
+      "dataset": "mmlu_pro",
+      "generator": "nvidia/Llama-3.1-Nemotron-Nano-8B-v1",
+      "evaluator": "mistralai/Magistral-Small-2506"
+    },
+    {
+      "dataset": "mmlu_pro",
+      "generator": "mistralai/Magistral-Small-2506",
+      "evaluator": "deepseek-ai/DeepSeek-R1-Distill-Llama-8B"
+    },
+    {
+      "dataset": "mmlu_pro",
+      "generator": "openai/gpt-oss-20b",
+      "evaluator": "Qwen/Qwen3-14B"
+    },
+    {
+      "dataset": "mmlu_pro",
+      "generator": "microsoft/Phi-4-reasoning-plus",
+      "evaluator": "Qwen/Qwen3-32B"
+    },
+    {
+      "dataset": "mmlu_pro",
+      "generator": "deepseek-ai/DeepSeek-R1-Distill-Qwen-32B",
+      "evaluator": "deepseek-ai/DeepSeek-R1-Distill-Qwen-14B"
+    },
+    {
+      "dataset": "mmlu_pro",
+      "generator": "microsoft/Phi-4-reasoning",
+      "evaluator": "Qwen/Qwen3-8B"
+    },
+    {
+      "dataset": "mmlu_pro",
+      "generator": "Qwen/Qwen3-14B",
+      "evaluator": "allenai/Olmo-3.1-32B-Think"
+    },
+    {
+      "dataset": "mmlu_pro",
+      "generator": "deepseek-ai/DeepSeek-R1-Distill-Qwen-14B",
+      "evaluator": "microsoft/Phi-4-reasoning-plus"
+    },
+    {
+      "dataset": "mmlu_pro",
+      "generator": "nvidia/Llama-3.1-Nemotron-Nano-8B-v1",
+      "evaluator": "microsoft/Phi-4-reasoning"
+    },
+    {
+      "dataset": "mmlu_pro",
+      "generator": "Qwen/Qwen3-32B",
+      "evaluator": "openai/gpt-oss-20b"
+    },
+    {
+      "dataset": "mmlu_pro",
+      "generator": "Qwen/Qwen3-8B",
+      "evaluator": "deepseek-ai/DeepSeek-R1-Distill-Qwen-32B"
+    },
+    {
+      "dataset": "mmlu_pro",
+      "generator": "allenai/Olmo-3.1-32B-Think",
+      "evaluator": "deepseek-ai/DeepSeek-R1-Distill-Llama-8B"
+    },
+    {
+      "dataset": "mmlu_pro",
+      "generator": "microsoft/Phi-4-reasoning-plus",
+      "evaluator": "nvidia/Llama-3.1-Nemotron-Nano-8B-v1"
+    },
+    {
+      "dataset": "mmlu_pro",
+      "generator": "Qwen/Qwen3-14B",
+      "evaluator": "deepseek-ai/DeepSeek-R1-Distill-Qwen-32B"
+    },
+    {
+      "dataset": "mmlu_pro",
+      "generator": "microsoft/Phi-4-reasoning",
+      "evaluator": "openai/gpt-oss-20b"
+    },
+    {
+      "dataset": "mmlu_pro",
+      "generator": "mistralai/Magistral-Small-2506",
+      "evaluator": "deepseek-ai/DeepSeek-R1-Distill-Qwen-14B"
+    },
+    {
+      "dataset": "mmlu_pro",
+      "generator": "deepseek-ai/DeepSeek-R1-Distill-Qwen-14B",
+      "evaluator": "Qwen/Qwen3-14B"
+    },
+    {
+      "dataset": "mmlu_pro",
+      "generator": "allenai/Olmo-3.1-32B-Think",
+      "evaluator": "Qwen/Qwen3-32B"
+    },
+    {
+      "dataset": "mmlu_pro",
+      "generator": "deepseek-ai/DeepSeek-R1-Distill-Llama-8B",
+      "evaluator": "Qwen/Qwen3-8B"
+    },
+    {
+      "dataset": "mmlu_pro",
+      "generator": "openai/gpt-oss-20b",
+      "evaluator": "mistralai/Magistral-Small-2506"
+    },
+    {
+      "dataset": "mmlu_pro",
+      "generator": "deepseek-ai/DeepSeek-R1-Distill-Qwen-32B",
+      "evaluator": "microsoft/Phi-4-reasoning"
+    },
+    {
+      "dataset": "mmlu_pro",
+      "generator": "Qwen/Qwen3-8B",
+      "evaluator": "microsoft/Phi-4-reasoning-plus"
+    },
+    {
+      "dataset": "mmlu_pro",
+      "generator": "Qwen/Qwen3-32B",
+      "evaluator": "allenai/Olmo-3.1-32B-Think"
+    },
+    {
+      "dataset": "mmlu_pro",
+      "generator": "deepseek-ai/DeepSeek-R1-Distill-Qwen-32B",
+      "evaluator": "Qwen/Qwen3-32B"
+    },
+    {
+      "dataset": "mmlu_pro",
+      "generator": "nvidia/Llama-3.1-Nemotron-Nano-8B-v1",
+      "evaluator": "allenai/Olmo-3.1-32B-Think"
+    },
+    {
+      "dataset": "mmlu_pro",
+      "generator": "deepseek-ai/DeepSeek-R1-Distill-Llama-8B",
+      "evaluator": "Qwen/Qwen3-14B"
+    },
+    {
+      "dataset": "mmlu_pro",
+      "generator": "Qwen/Qwen3-8B",
+      "evaluator": "mistralai/Magistral-Small-2506"
+    },
+    {
+      "dataset": "mmlu_pro",
+      "generator": "deepseek-ai/DeepSeek-R1-Distill-Qwen-14B",
+      "evaluator": "openai/gpt-oss-20b"
+    },
+    {
+      "dataset": "mmlu_pro",
+      "generator": "microsoft/Phi-4-reasoning",
+      "evaluator": "deepseek-ai/DeepSeek-R1-Distill-Llama-8B"
+    },
+    {
+      "dataset": "mmlu_pro",
+      "generator": "Qwen/Qwen3-32B",
+      "evaluator": "Qwen/Qwen3-8B"
+    },
+    {
+      "dataset": "mmlu_pro",
+      "generator": "allenai/Olmo-3.1-32B-Think",
+      "evaluator": "microsoft/Phi-4-reasoning-plus"
+    },
+    {
+      "dataset": "mmlu_pro",
+      "generator": "microsoft/Phi-4-reasoning-plus",
+      "evaluator": "deepseek-ai/DeepSeek-R1-Distill-Qwen-14B"
+    },
+    {
+      "dataset": "mmlu_pro",
+      "generator": "openai/gpt-oss-20b",
+      "evaluator": "deepseek-ai/DeepSeek-R1-Distill-Qwen-32B"
+    },
+    {
+      "dataset": "mmlu_pro",
+      "generator": "Qwen/Qwen3-14B",
+      "evaluator": "nvidia/Llama-3.1-Nemotron-Nano-8B-v1"
+    },
+    {
+      "dataset": "mmlu_pro",
+      "generator": "mistralai/Magistral-Small-2506",
+      "evaluator": "microsoft/Phi-4-reasoning"
+    },
+    {
+      "dataset": "arc_challenge",
+      "generator": "Qwen/Qwen3-32B",
+      "evaluator": "Qwen/Qwen3-32B"
+    },
+    {
+      "dataset": "arc_challenge",
+      "generator": "deepseek-ai/DeepSeek-R1-Distill-Qwen-32B",
+      "evaluator": "deepseek-ai/DeepSeek-R1-Distill-Qwen-32B"
+    },
+    {
+      "dataset": "arc_challenge",
+      "generator": "allenai/Olmo-3.1-32B-Think",
+      "evaluator": "allenai/Olmo-3.1-32B-Think"
+    },
+    {
+      "dataset": "arc_challenge",
+      "generator": "microsoft/Phi-4-reasoning",
+      "evaluator": "microsoft/Phi-4-reasoning"
+    },
+    {
+      "dataset": "arc_challenge",
+      "generator": "deepseek-ai/DeepSeek-R1-Distill-Qwen-14B",
+      "evaluator": "deepseek-ai/DeepSeek-R1-Distill-Qwen-14B"
+    },
+    {
+      "dataset": "arc_challenge",
+      "generator": "deepseek-ai/DeepSeek-R1-Distill-Llama-8B",
+      "evaluator": "deepseek-ai/DeepSeek-R1-Distill-Llama-8B"
+    },
+    {
+      "dataset": "arc_challenge",
+      "generator": "Qwen/Qwen3-14B",
+      "evaluator": "Qwen/Qwen3-14B"
+    },
+    {
+      "dataset": "arc_challenge",
+      "generator": "Qwen/Qwen3-8B",
+      "evaluator": "Qwen/Qwen3-8B"
+    },
+    {
+      "dataset": "arc_challenge",
+      "generator": "microsoft/Phi-4-reasoning-plus",
+      "evaluator": "microsoft/Phi-4-reasoning-plus"
+    },
+    {
+      "dataset": "arc_challenge",
+      "generator": "openai/gpt-oss-20b",
+      "evaluator": "openai/gpt-oss-20b"
+    },
+    {
+      "dataset": "arc_challenge",
+      "generator": "mistralai/Magistral-Small-2506",
+      "evaluator": "mistralai/Magistral-Small-2506"
+    },
+    {
+      "dataset": "arc_challenge",
+      "generator": "nvidia/Llama-3.1-Nemotron-Nano-8B-v1",
+      "evaluator": "nvidia/Llama-3.1-Nemotron-Nano-8B-v1"
+    },
+    {
+      "dataset": "arc_challenge",
+      "generator": "deepseek-ai/DeepSeek-R1-Distill-Llama-8B",
+      "evaluator": "nvidia/Llama-3.1-Nemotron-Nano-8B-v1"
+    },
+    {
+      "dataset": "arc_challenge",
+      "generator": "nvidia/Llama-3.1-Nemotron-Nano-8B-v1",
+      "evaluator": "mistralai/Magistral-Small-2506"
+    },
+    {
+      "dataset": "arc_challenge",
+      "generator": "mistralai/Magistral-Small-2506",
+      "evaluator": "deepseek-ai/DeepSeek-R1-Distill-Llama-8B"
+    },
+    {
+      "dataset": "arc_challenge",
+      "generator": "openai/gpt-oss-20b",
+      "evaluator": "Qwen/Qwen3-14B"
+    },
+    {
+      "dataset": "arc_challenge",
+      "generator": "microsoft/Phi-4-reasoning-plus",
+      "evaluator": "Qwen/Qwen3-32B"
+    },
+    {
+      "dataset": "arc_challenge",
+      "generator": "deepseek-ai/DeepSeek-R1-Distill-Qwen-32B",
+      "evaluator": "deepseek-ai/DeepSeek-R1-Distill-Qwen-14B"
+    },
+    {
+      "dataset": "arc_challenge",
+      "generator": "microsoft/Phi-4-reasoning",
+      "evaluator": "Qwen/Qwen3-8B"
+    },
+    {
+      "dataset": "arc_challenge",
+      "generator": "Qwen/Qwen3-14B",
+      "evaluator": "allenai/Olmo-3.1-32B-Think"
+    },
+    {
+      "dataset": "arc_challenge",
+      "generator": "deepseek-ai/DeepSeek-R1-Distill-Qwen-14B",
+      "evaluator": "microsoft/Phi-4-reasoning-plus"
+    },
+    {
+      "dataset": "arc_challenge",
+      "generator": "nvidia/Llama-3.1-Nemotron-Nano-8B-v1",
+      "evaluator": "microsoft/Phi-4-reasoning"
+    },
+    {
+      "dataset": "arc_challenge",
+      "generator": "Qwen/Qwen3-32B",
+      "evaluator": "openai/gpt-oss-20b"
+    },
+    {
+      "dataset": "arc_challenge",
+      "generator": "Qwen/Qwen3-8B",
+      "evaluator": "deepseek-ai/DeepSeek-R1-Distill-Qwen-32B"
+    },
+    {
+      "dataset": "arc_challenge",
+      "generator": "allenai/Olmo-3.1-32B-Think",
+      "evaluator": "deepseek-ai/DeepSeek-R1-Distill-Llama-8B"
+    },
+    {
+      "dataset": "arc_challenge",
+      "generator": "microsoft/Phi-4-reasoning-plus",
+      "evaluator": "nvidia/Llama-3.1-Nemotron-Nano-8B-v1"
+    },
+    {
+      "dataset": "arc_challenge",
+      "generator": "Qwen/Qwen3-14B",
+      "evaluator": "deepseek-ai/DeepSeek-R1-Distill-Qwen-32B"
+    },
+    {
+      "dataset": "arc_challenge",
+      "generator": "microsoft/Phi-4-reasoning",
+      "evaluator": "openai/gpt-oss-20b"
+    },
+    {
+      "dataset": "arc_challenge",
+      "generator": "mistralai/Magistral-Small-2506",
+      "evaluator": "deepseek-ai/DeepSeek-R1-Distill-Qwen-14B"
+    },
+    {
+      "dataset": "arc_challenge",
+      "generator": "deepseek-ai/DeepSeek-R1-Distill-Qwen-14B",
+      "evaluator": "Qwen/Qwen3-14B"
+    },
+    {
+      "dataset": "arc_challenge",
+      "generator": "allenai/Olmo-3.1-32B-Think",
+      "evaluator": "Qwen/Qwen3-32B"
+    },
+    {
+      "dataset": "arc_challenge",
+      "generator": "deepseek-ai/DeepSeek-R1-Distill-Llama-8B",
+      "evaluator": "Qwen/Qwen3-8B"
+    },
+    {
+      "dataset": "arc_challenge",
+      "generator": "openai/gpt-oss-20b",
+      "evaluator": "mistralai/Magistral-Small-2506"
+    },
+    {
+      "dataset": "arc_challenge",
+      "generator": "deepseek-ai/DeepSeek-R1-Distill-Qwen-32B",
+      "evaluator": "microsoft/Phi-4-reasoning"
+    },
+    {
+      "dataset": "arc_challenge",
+      "generator": "Qwen/Qwen3-8B",
+      "evaluator": "microsoft/Phi-4-reasoning-plus"
+    },
+    {
+      "dataset": "arc_challenge",
+      "generator": "Qwen/Qwen3-32B",
+      "evaluator": "allenai/Olmo-3.1-32B-Think"
+    },
+    {
+      "dataset": "arc_challenge",
+      "generator": "deepseek-ai/DeepSeek-R1-Distill-Qwen-32B",
+      "evaluator": "Qwen/Qwen3-32B"
+    },
+    {
+      "dataset": "arc_challenge",
+      "generator": "nvidia/Llama-3.1-Nemotron-Nano-8B-v1",
+      "evaluator": "allenai/Olmo-3.1-32B-Think"
+    },
+    {
+      "dataset": "arc_challenge",
+      "generator": "deepseek-ai/DeepSeek-R1-Distill-Llama-8B",
+      "evaluator": "Qwen/Qwen3-14B"
+    },
+    {
+      "dataset": "arc_challenge",
+      "generator": "Qwen/Qwen3-8B",
+      "evaluator": "mistralai/Magistral-Small-2506"
+    },
+    {
+      "dataset": "arc_challenge",
+      "generator": "deepseek-ai/DeepSeek-R1-Distill-Qwen-14B",
+      "evaluator": "openai/gpt-oss-20b"
+    },
+    {
+      "dataset": "arc_challenge",
+      "generator": "microsoft/Phi-4-reasoning",
+      "evaluator": "deepseek-ai/DeepSeek-R1-Distill-Llama-8B"
+    },
+    {
+      "dataset": "arc_challenge",
+      "generator": "Qwen/Qwen3-32B",
+      "evaluator": "Qwen/Qwen3-8B"
+    },
+    {
+      "dataset": "arc_challenge",
+      "generator": "allenai/Olmo-3.1-32B-Think",
+      "evaluator": "microsoft/Phi-4-reasoning-plus"
+    },
+    {
+      "dataset": "arc_challenge",
+      "generator": "microsoft/Phi-4-reasoning-plus",
+      "evaluator": "deepseek-ai/DeepSeek-R1-Distill-Qwen-14B"
+    },
+    {
+      "dataset": "arc_challenge",
+      "generator": "openai/gpt-oss-20b",
+      "evaluator": "deepseek-ai/DeepSeek-R1-Distill-Qwen-32B"
+    },
+    {
+      "dataset": "arc_challenge",
+      "generator": "Qwen/Qwen3-14B",
+      "evaluator": "nvidia/Llama-3.1-Nemotron-Nano-8B-v1"
+    },
+    {
+      "dataset": "arc_challenge",
+      "generator": "mistralai/Magistral-Small-2506",
+      "evaluator": "microsoft/Phi-4-reasoning"
+    },
+    {
+      "dataset": "bbh",
+      "generator": "Qwen/Qwen3-32B",
+      "evaluator": "Qwen/Qwen3-32B"
+    },
+    {
+      "dataset": "bbh",
+      "generator": "deepseek-ai/DeepSeek-R1-Distill-Qwen-32B",
+      "evaluator": "deepseek-ai/DeepSeek-R1-Distill-Qwen-32B"
+    },
+    {
+      "dataset": "bbh",
+      "generator": "allenai/Olmo-3.1-32B-Think",
+      "evaluator": "allenai/Olmo-3.1-32B-Think"
+    },
+    {
+      "dataset": "bbh",
+      "generator": "microsoft/Phi-4-reasoning",
+      "evaluator": "microsoft/Phi-4-reasoning"
+    },
+    {
+      "dataset": "bbh",
+      "generator": "deepseek-ai/DeepSeek-R1-Distill-Qwen-14B",
+      "evaluator": "deepseek-ai/DeepSeek-R1-Distill-Qwen-14B"
+    },
+    {
+      "dataset": "bbh",
+      "generator": "deepseek-ai/DeepSeek-R1-Distill-Llama-8B",
+      "evaluator": "deepseek-ai/DeepSeek-R1-Distill-Llama-8B"
+    },
+    {
+      "dataset": "bbh",
+      "generator": "Qwen/Qwen3-14B",
+      "evaluator": "Qwen/Qwen3-14B"
+    },
+    {
+      "dataset": "bbh",
+      "generator": "Qwen/Qwen3-8B",
+      "evaluator": "Qwen/Qwen3-8B"
+    },
+    {
+      "dataset": "bbh",
+      "generator": "microsoft/Phi-4-reasoning-plus",
+      "evaluator": "microsoft/Phi-4-reasoning-plus"
+    },
+    {
+      "dataset": "bbh",
+      "generator": "openai/gpt-oss-20b",
+      "evaluator": "openai/gpt-oss-20b"
+    },
+    {
+      "dataset": "bbh",
+      "generator": "mistralai/Magistral-Small-2506",
+      "evaluator": "mistralai/Magistral-Small-2506"
+    },
+    {
+      "dataset": "bbh",
+      "generator": "nvidia/Llama-3.1-Nemotron-Nano-8B-v1",
+      "evaluator": "nvidia/Llama-3.1-Nemotron-Nano-8B-v1"
+    },
+    {
+      "dataset": "bbh",
+      "generator": "deepseek-ai/DeepSeek-R1-Distill-Llama-8B",
+      "evaluator": "nvidia/Llama-3.1-Nemotron-Nano-8B-v1"
+    },
+    {
+      "dataset": "bbh",
+      "generator": "nvidia/Llama-3.1-Nemotron-Nano-8B-v1",
+      "evaluator": "mistralai/Magistral-Small-2506"
+    },
+    {
+      "dataset": "bbh",
+      "generator": "mistralai/Magistral-Small-2506",
+      "evaluator": "deepseek-ai/DeepSeek-R1-Distill-Llama-8B"
+    },
+    {
+      "dataset": "bbh",
+      "generator": "openai/gpt-oss-20b",
+      "evaluator": "Qwen/Qwen3-14B"
+    },
+    {
+      "dataset": "bbh",
+      "generator": "microsoft/Phi-4-reasoning-plus",
+      "evaluator": "Qwen/Qwen3-32B"
+    },
+    {
+      "dataset": "bbh",
+      "generator": "deepseek-ai/DeepSeek-R1-Distill-Qwen-32B",
+      "evaluator": "deepseek-ai/DeepSeek-R1-Distill-Qwen-14B"
+    },
+    {
+      "dataset": "bbh",
+      "generator": "microsoft/Phi-4-reasoning",
+      "evaluator": "Qwen/Qwen3-8B"
+    },
+    {
+      "dataset": "bbh",
+      "generator": "Qwen/Qwen3-14B",
+      "evaluator": "allenai/Olmo-3.1-32B-Think"
+    },
+    {
+      "dataset": "bbh",
+      "generator": "deepseek-ai/DeepSeek-R1-Distill-Qwen-14B",
+      "evaluator": "microsoft/Phi-4-reasoning-plus"
+    },
+    {
+      "dataset": "bbh",
+      "generator": "nvidia/Llama-3.1-Nemotron-Nano-8B-v1",
+      "evaluator": "microsoft/Phi-4-reasoning"
+    },
+    {
+      "dataset": "bbh",
+      "generator": "Qwen/Qwen3-32B",
+      "evaluator": "openai/gpt-oss-20b"
+    },
+    {
+      "dataset": "bbh",
+      "generator": "Qwen/Qwen3-8B",
+      "evaluator": "deepseek-ai/DeepSeek-R1-Distill-Qwen-32B"
+    },
+    {
+      "dataset": "bbh",
+      "generator": "allenai/Olmo-3.1-32B-Think",
+      "evaluator": "deepseek-ai/DeepSeek-R1-Distill-Llama-8B"
+    },
+    {
+      "dataset": "bbh",
+      "generator": "microsoft/Phi-4-reasoning-plus",
+      "evaluator": "nvidia/Llama-3.1-Nemotron-Nano-8B-v1"
+    },
+    {
+      "dataset": "bbh",
+      "generator": "Qwen/Qwen3-14B",
+      "evaluator": "deepseek-ai/DeepSeek-R1-Distill-Qwen-32B"
+    },
+    {
+      "dataset": "bbh",
+      "generator": "microsoft/Phi-4-reasoning",
+      "evaluator": "openai/gpt-oss-20b"
+    },
+    {
+      "dataset": "bbh",
+      "generator": "mistralai/Magistral-Small-2506",
+      "evaluator": "deepseek-ai/DeepSeek-R1-Distill-Qwen-14B"
+    },
+    {
+      "dataset": "bbh",
+      "generator": "deepseek-ai/DeepSeek-R1-Distill-Qwen-14B",
+      "evaluator": "Qwen/Qwen3-14B"
+    },
+    {
+      "dataset": "bbh",
+      "generator": "allenai/Olmo-3.1-32B-Think",
+      "evaluator": "Qwen/Qwen3-32B"
+    },
+    {
+      "dataset": "bbh",
+      "generator": "deepseek-ai/DeepSeek-R1-Distill-Llama-8B",
+      "evaluator": "Qwen/Qwen3-8B"
+    },
+    {
+      "dataset": "bbh",
+      "generator": "openai/gpt-oss-20b",
+      "evaluator": "mistralai/Magistral-Small-2506"
+    },
+    {
+      "dataset": "bbh",
+      "generator": "deepseek-ai/DeepSeek-R1-Distill-Qwen-32B",
+      "evaluator": "microsoft/Phi-4-reasoning"
+    },
+    {
+      "dataset": "bbh",
+      "generator": "Qwen/Qwen3-8B",
+      "evaluator": "microsoft/Phi-4-reasoning-plus"
+    },
+    {
+      "dataset": "bbh",
+      "generator": "Qwen/Qwen3-32B",
+      "evaluator": "allenai/Olmo-3.1-32B-Think"
+    },
+    {
+      "dataset": "bbh",
+      "generator": "deepseek-ai/DeepSeek-R1-Distill-Qwen-32B",
+      "evaluator": "Qwen/Qwen3-32B"
+    },
+    {
+      "dataset": "bbh",
+      "generator": "nvidia/Llama-3.1-Nemotron-Nano-8B-v1",
+      "evaluator": "allenai/Olmo-3.1-32B-Think"
+    },
+    {
+      "dataset": "bbh",
+      "generator": "deepseek-ai/DeepSeek-R1-Distill-Llama-8B",
+      "evaluator": "Qwen/Qwen3-14B"
+    },
+    {
+      "dataset": "bbh",
+      "generator": "Qwen/Qwen3-8B",
+      "evaluator": "mistralai/Magistral-Small-2506"
+    },
+    {
+      "dataset": "bbh",
+      "generator": "deepseek-ai/DeepSeek-R1-Distill-Qwen-14B",
+      "evaluator": "openai/gpt-oss-20b"
+    },
+    {
+      "dataset": "bbh",
+      "generator": "microsoft/Phi-4-reasoning",
+      "evaluator": "deepseek-ai/DeepSeek-R1-Distill-Llama-8B"
+    },
+    {
+      "dataset": "bbh",
+      "generator": "Qwen/Qwen3-32B",
+      "evaluator": "Qwen/Qwen3-8B"
+    },
+    {
+      "dataset": "bbh",
+      "generator": "allenai/Olmo-3.1-32B-Think",
+      "evaluator": "microsoft/Phi-4-reasoning-plus"
+    },
+    {
+      "dataset": "bbh",
+      "generator": "microsoft/Phi-4-reasoning-plus",
+      "evaluator": "deepseek-ai/DeepSeek-R1-Distill-Qwen-14B"
+    },
+    {
+      "dataset": "bbh",
+      "generator": "openai/gpt-oss-20b",
+      "evaluator": "deepseek-ai/DeepSeek-R1-Distill-Qwen-32B"
+    },
+    {
+      "dataset": "bbh",
+      "generator": "Qwen/Qwen3-14B",
+      "evaluator": "nvidia/Llama-3.1-Nemotron-Nano-8B-v1"
+    },
+    {
+      "dataset": "bbh",
+      "generator": "mistralai/Magistral-Small-2506",
+      "evaluator": "microsoft/Phi-4-reasoning"
+    },
+    {
+      "dataset": "folio",
+      "generator": "Qwen/Qwen3-32B",
+      "evaluator": "Qwen/Qwen3-32B"
+    },
+    {
+      "dataset": "folio",
+      "generator": "deepseek-ai/DeepSeek-R1-Distill-Qwen-32B",
+      "evaluator": "deepseek-ai/DeepSeek-R1-Distill-Qwen-32B"
+    },
+    {
+      "dataset": "folio",
+      "generator": "allenai/Olmo-3.1-32B-Think",
+      "evaluator": "allenai/Olmo-3.1-32B-Think"
+    },
+    {
+      "dataset": "folio",
+      "generator": "microsoft/Phi-4-reasoning",
+      "evaluator": "microsoft/Phi-4-reasoning"
+    },
+    {
+      "dataset": "folio",
+      "generator": "deepseek-ai/DeepSeek-R1-Distill-Qwen-14B",
+      "evaluator": "deepseek-ai/DeepSeek-R1-Distill-Qwen-14B"
+    },
+    {
+      "dataset": "folio",
+      "generator": "deepseek-ai/DeepSeek-R1-Distill-Llama-8B",
+      "evaluator": "deepseek-ai/DeepSeek-R1-Distill-Llama-8B"
+    },
+    {
+      "dataset": "folio",
+      "generator": "Qwen/Qwen3-14B",
+      "evaluator": "Qwen/Qwen3-14B"
+    },
+    {
+      "dataset": "folio",
+      "generator": "Qwen/Qwen3-8B",
+      "evaluator": "Qwen/Qwen3-8B"
+    },
+    {
+      "dataset": "folio",
+      "generator": "microsoft/Phi-4-reasoning-plus",
+      "evaluator": "microsoft/Phi-4-reasoning-plus"
+    },
+    {
+      "dataset": "folio",
+      "generator": "openai/gpt-oss-20b",
+      "evaluator": "openai/gpt-oss-20b"
+    },
+    {
+      "dataset": "folio",
+      "generator": "mistralai/Magistral-Small-2506",
+      "evaluator": "mistralai/Magistral-Small-2506"
+    },
+    {
+      "dataset": "folio",
+      "generator": "nvidia/Llama-3.1-Nemotron-Nano-8B-v1",
+      "evaluator": "nvidia/Llama-3.1-Nemotron-Nano-8B-v1"
+    },
+    {
+      "dataset": "folio",
+      "generator": "deepseek-ai/DeepSeek-R1-Distill-Llama-8B",
+      "evaluator": "nvidia/Llama-3.1-Nemotron-Nano-8B-v1"
+    },
+    {
+      "dataset": "folio",
+      "generator": "nvidia/Llama-3.1-Nemotron-Nano-8B-v1",
+      "evaluator": "mistralai/Magistral-Small-2506"
+    },
+    {
+      "dataset": "folio",
+      "generator": "mistralai/Magistral-Small-2506",
+      "evaluator": "deepseek-ai/DeepSeek-R1-Distill-Llama-8B"
+    },
+    {
+      "dataset": "folio",
+      "generator": "openai/gpt-oss-20b",
+      "evaluator": "Qwen/Qwen3-14B"
+    },
+    {
+      "dataset": "folio",
+      "generator": "microsoft/Phi-4-reasoning-plus",
+      "evaluator": "Qwen/Qwen3-32B"
+    },
+    {
+      "dataset": "folio",
+      "generator": "deepseek-ai/DeepSeek-R1-Distill-Qwen-32B",
+      "evaluator": "deepseek-ai/DeepSeek-R1-Distill-Qwen-14B"
+    },
+    {
+      "dataset": "folio",
+      "generator": "microsoft/Phi-4-reasoning",
+      "evaluator": "Qwen/Qwen3-8B"
+    },
+    {
+      "dataset": "folio",
+      "generator": "Qwen/Qwen3-14B",
+      "evaluator": "allenai/Olmo-3.1-32B-Think"
+    },
+    {
+      "dataset": "folio",
+      "generator": "deepseek-ai/DeepSeek-R1-Distill-Qwen-14B",
+      "evaluator": "microsoft/Phi-4-reasoning-plus"
+    },
+    {
+      "dataset": "folio",
+      "generator": "nvidia/Llama-3.1-Nemotron-Nano-8B-v1",
+      "evaluator": "microsoft/Phi-4-reasoning"
+    },
+    {
+      "dataset": "folio",
+      "generator": "Qwen/Qwen3-32B",
+      "evaluator": "openai/gpt-oss-20b"
+    },
+    {
+      "dataset": "folio",
+      "generator": "Qwen/Qwen3-8B",
+      "evaluator": "deepseek-ai/DeepSeek-R1-Distill-Qwen-32B"
+    },
+    {
+      "dataset": "folio",
+      "generator": "allenai/Olmo-3.1-32B-Think",
+      "evaluator": "deepseek-ai/DeepSeek-R1-Distill-Llama-8B"
+    },
+    {
+      "dataset": "folio",
+      "generator": "microsoft/Phi-4-reasoning-plus",
+      "evaluator": "nvidia/Llama-3.1-Nemotron-Nano-8B-v1"
+    },
+    {
+      "dataset": "folio",
+      "generator": "Qwen/Qwen3-14B",
+      "evaluator": "deepseek-ai/DeepSeek-R1-Distill-Qwen-32B"
+    },
+    {
+      "dataset": "folio",
+      "generator": "microsoft/Phi-4-reasoning",
+      "evaluator": "openai/gpt-oss-20b"
+    },
+    {
+      "dataset": "folio",
+      "generator": "mistralai/Magistral-Small-2506",
+      "evaluator": "deepseek-ai/DeepSeek-R1-Distill-Qwen-14B"
+    },
+    {
+      "dataset": "folio",
+      "generator": "deepseek-ai/DeepSeek-R1-Distill-Qwen-14B",
+      "evaluator": "Qwen/Qwen3-14B"
+    },
+    {
+      "dataset": "folio",
+      "generator": "allenai/Olmo-3.1-32B-Think",
+      "evaluator": "Qwen/Qwen3-32B"
+    },
+    {
+      "dataset": "folio",
+      "generator": "deepseek-ai/DeepSeek-R1-Distill-Llama-8B",
+      "evaluator": "Qwen/Qwen3-8B"
+    },
+    {
+      "dataset": "folio",
+      "generator": "openai/gpt-oss-20b",
+      "evaluator": "mistralai/Magistral-Small-2506"
+    },
+    {
+      "dataset": "folio",
+      "generator": "deepseek-ai/DeepSeek-R1-Distill-Qwen-32B",
+      "evaluator": "microsoft/Phi-4-reasoning"
+    },
+    {
+      "dataset": "folio",
+      "generator": "Qwen/Qwen3-8B",
+      "evaluator": "microsoft/Phi-4-reasoning-plus"
+    },
+    {
+      "dataset": "folio",
+      "generator": "Qwen/Qwen3-32B",
+      "evaluator": "allenai/Olmo-3.1-32B-Think"
+    },
+    {
+      "dataset": "folio",
+      "generator": "deepseek-ai/DeepSeek-R1-Distill-Qwen-32B",
+      "evaluator": "Qwen/Qwen3-32B"
+    },
+    {
+      "dataset": "folio",
+      "generator": "nvidia/Llama-3.1-Nemotron-Nano-8B-v1",
+      "evaluator": "allenai/Olmo-3.1-32B-Think"
+    },
+    {
+      "dataset": "folio",
+      "generator": "deepseek-ai/DeepSeek-R1-Distill-Llama-8B",
+      "evaluator": "Qwen/Qwen3-14B"
+    },
+    {
+      "dataset": "folio",
+      "generator": "Qwen/Qwen3-8B",
+      "evaluator": "mistralai/Magistral-Small-2506"
+    },
+    {
+      "dataset": "folio",
+      "generator": "deepseek-ai/DeepSeek-R1-Distill-Qwen-14B",
+      "evaluator": "openai/gpt-oss-20b"
+    },
+    {
+      "dataset": "folio",
+      "generator": "microsoft/Phi-4-reasoning",
+      "evaluator": "deepseek-ai/DeepSeek-R1-Distill-Llama-8B"
+    },
+    {
+      "dataset": "folio",
+      "generator": "Qwen/Qwen3-32B",
+      "evaluator": "Qwen/Qwen3-8B"
+    },
+    {
+      "dataset": "folio",
+      "generator": "allenai/Olmo-3.1-32B-Think",
+      "evaluator": "microsoft/Phi-4-reasoning-plus"
+    },
+    {
+      "dataset": "folio",
+      "generator": "microsoft/Phi-4-reasoning-plus",
+      "evaluator": "deepseek-ai/DeepSeek-R1-Distill-Qwen-14B"
+    },
+    {
+      "dataset": "folio",
+      "generator": "openai/gpt-oss-20b",
+      "evaluator": "deepseek-ai/DeepSeek-R1-Distill-Qwen-32B"
+    },
+    {
+      "dataset": "folio",
+      "generator": "Qwen/Qwen3-14B",
+      "evaluator": "nvidia/Llama-3.1-Nemotron-Nano-8B-v1"
+    },
+    {
+      "dataset": "folio",
+      "generator": "mistralai/Magistral-Small-2506",
+      "evaluator": "microsoft/Phi-4-reasoning"
+    },
+    {
+      "dataset": "logiqa",
+      "generator": "Qwen/Qwen3-32B",
+      "evaluator": "Qwen/Qwen3-32B"
+    },
+    {
+      "dataset": "logiqa",
+      "generator": "deepseek-ai/DeepSeek-R1-Distill-Qwen-32B",
+      "evaluator": "deepseek-ai/DeepSeek-R1-Distill-Qwen-32B"
+    },
+    {
+      "dataset": "logiqa",
+      "generator": "allenai/Olmo-3.1-32B-Think",
+      "evaluator": "allenai/Olmo-3.1-32B-Think"
+    },
+    {
+      "dataset": "logiqa",
+      "generator": "microsoft/Phi-4-reasoning",
+      "evaluator": "microsoft/Phi-4-reasoning"
+    },
+    {
+      "dataset": "logiqa",
+      "generator": "deepseek-ai/DeepSeek-R1-Distill-Qwen-14B",
+      "evaluator": "deepseek-ai/DeepSeek-R1-Distill-Qwen-14B"
+    },
+    {
+      "dataset": "logiqa",
+      "generator": "deepseek-ai/DeepSeek-R1-Distill-Llama-8B",
+      "evaluator": "deepseek-ai/DeepSeek-R1-Distill-Llama-8B"
+    },
+    {
+      "dataset": "logiqa",
+      "generator": "Qwen/Qwen3-14B",
+      "evaluator": "Qwen/Qwen3-14B"
+    },
+    {
+      "dataset": "logiqa",
+      "generator": "Qwen/Qwen3-8B",
+      "evaluator": "Qwen/Qwen3-8B"
+    },
+    {
+      "dataset": "logiqa",
+      "generator": "microsoft/Phi-4-reasoning-plus",
+      "evaluator": "microsoft/Phi-4-reasoning-plus"
+    },
+    {
+      "dataset": "logiqa",
+      "generator": "openai/gpt-oss-20b",
+      "evaluator": "openai/gpt-oss-20b"
+    },
+    {
+      "dataset": "logiqa",
+      "generator": "mistralai/Magistral-Small-2506",
+      "evaluator": "mistralai/Magistral-Small-2506"
+    },
+    {
+      "dataset": "logiqa",
+      "generator": "nvidia/Llama-3.1-Nemotron-Nano-8B-v1",
+      "evaluator": "nvidia/Llama-3.1-Nemotron-Nano-8B-v1"
+    },
+    {
+      "dataset": "logiqa",
+      "generator": "deepseek-ai/DeepSeek-R1-Distill-Llama-8B",
+      "evaluator": "nvidia/Llama-3.1-Nemotron-Nano-8B-v1"
+    },
+    {
+      "dataset": "logiqa",
+      "generator": "nvidia/Llama-3.1-Nemotron-Nano-8B-v1",
+      "evaluator": "mistralai/Magistral-Small-2506"
+    },
+    {
+      "dataset": "logiqa",
+      "generator": "mistralai/Magistral-Small-2506",
+      "evaluator": "deepseek-ai/DeepSeek-R1-Distill-Llama-8B"
+    },
+    {
+      "dataset": "logiqa",
+      "generator": "openai/gpt-oss-20b",
+      "evaluator": "Qwen/Qwen3-14B"
+    },
+    {
+      "dataset": "logiqa",
+      "generator": "microsoft/Phi-4-reasoning-plus",
+      "evaluator": "Qwen/Qwen3-32B"
+    },
+    {
+      "dataset": "logiqa",
+      "generator": "deepseek-ai/DeepSeek-R1-Distill-Qwen-32B",
+      "evaluator": "deepseek-ai/DeepSeek-R1-Distill-Qwen-14B"
+    },
+    {
+      "dataset": "logiqa",
+      "generator": "microsoft/Phi-4-reasoning",
+      "evaluator": "Qwen/Qwen3-8B"
+    },
+    {
+      "dataset": "logiqa",
+      "generator": "Qwen/Qwen3-14B",
+      "evaluator": "allenai/Olmo-3.1-32B-Think"
+    },
+    {
+      "dataset": "logiqa",
+      "generator": "deepseek-ai/DeepSeek-R1-Distill-Qwen-14B",
+      "evaluator": "microsoft/Phi-4-reasoning-plus"
+    },
+    {
+      "dataset": "logiqa",
+      "generator": "nvidia/Llama-3.1-Nemotron-Nano-8B-v1",
+      "evaluator": "microsoft/Phi-4-reasoning"
+    },
+    {
+      "dataset": "logiqa",
+      "generator": "Qwen/Qwen3-32B",
+      "evaluator": "openai/gpt-oss-20b"
+    },
+    {
+      "dataset": "logiqa",
+      "generator": "Qwen/Qwen3-8B",
+      "evaluator": "deepseek-ai/DeepSeek-R1-Distill-Qwen-32B"
+    },
+    {
+      "dataset": "logiqa",
+      "generator": "allenai/Olmo-3.1-32B-Think",
+      "evaluator": "deepseek-ai/DeepSeek-R1-Distill-Llama-8B"
+    },
+    {
+      "dataset": "logiqa",
+      "generator": "microsoft/Phi-4-reasoning-plus",
+      "evaluator": "nvidia/Llama-3.1-Nemotron-Nano-8B-v1"
+    },
+    {
+      "dataset": "logiqa",
+      "generator": "Qwen/Qwen3-14B",
+      "evaluator": "deepseek-ai/DeepSeek-R1-Distill-Qwen-32B"
+    },
+    {
+      "dataset": "logiqa",
+      "generator": "microsoft/Phi-4-reasoning",
+      "evaluator": "openai/gpt-oss-20b"
+    },
+    {
+      "dataset": "logiqa",
+      "generator": "mistralai/Magistral-Small-2506",
+      "evaluator": "deepseek-ai/DeepSeek-R1-Distill-Qwen-14B"
+    },
+    {
+      "dataset": "logiqa",
+      "generator": "deepseek-ai/DeepSeek-R1-Distill-Qwen-14B",
+      "evaluator": "Qwen/Qwen3-14B"
+    },
+    {
+      "dataset": "logiqa",
+      "generator": "allenai/Olmo-3.1-32B-Think",
+      "evaluator": "Qwen/Qwen3-32B"
+    },
+    {
+      "dataset": "logiqa",
+      "generator": "deepseek-ai/DeepSeek-R1-Distill-Llama-8B",
+      "evaluator": "Qwen/Qwen3-8B"
+    },
+    {
+      "dataset": "logiqa",
+      "generator": "openai/gpt-oss-20b",
+      "evaluator": "mistralai/Magistral-Small-2506"
+    },
+    {
+      "dataset": "logiqa",
+      "generator": "deepseek-ai/DeepSeek-R1-Distill-Qwen-32B",
+      "evaluator": "microsoft/Phi-4-reasoning"
+    },
+    {
+      "dataset": "logiqa",
+      "generator": "Qwen/Qwen3-8B",
+      "evaluator": "microsoft/Phi-4-reasoning-plus"
+    },
+    {
+      "dataset": "logiqa",
+      "generator": "Qwen/Qwen3-32B",
+      "evaluator": "allenai/Olmo-3.1-32B-Think"
+    },
+    {
+      "dataset": "logiqa",
+      "generator": "deepseek-ai/DeepSeek-R1-Distill-Qwen-32B",
+      "evaluator": "Qwen/Qwen3-32B"
+    },
+    {
+      "dataset": "logiqa",
+      "generator": "nvidia/Llama-3.1-Nemotron-Nano-8B-v1",
+      "evaluator": "allenai/Olmo-3.1-32B-Think"
+    },
+    {
+      "dataset": "logiqa",
+      "generator": "deepseek-ai/DeepSeek-R1-Distill-Llama-8B",
+      "evaluator": "Qwen/Qwen3-14B"
+    },
+    {
+      "dataset": "logiqa",
+      "generator": "Qwen/Qwen3-8B",
+      "evaluator": "mistralai/Magistral-Small-2506"
+    },
+    {
+      "dataset": "logiqa",
+      "generator": "deepseek-ai/DeepSeek-R1-Distill-Qwen-14B",
+      "evaluator": "openai/gpt-oss-20b"
+    },
+    {
+      "dataset": "logiqa",
+      "generator": "microsoft/Phi-4-reasoning",
+      "evaluator": "deepseek-ai/DeepSeek-R1-Distill-Llama-8B"
+    },
+    {
+      "dataset": "logiqa",
+      "generator": "Qwen/Qwen3-32B",
+      "evaluator": "Qwen/Qwen3-8B"
+    },
+    {
+      "dataset": "logiqa",
+      "generator": "allenai/Olmo-3.1-32B-Think",
+      "evaluator": "microsoft/Phi-4-reasoning-plus"
+    },
+    {
+      "dataset": "logiqa",
+      "generator": "microsoft/Phi-4-reasoning-plus",
+      "evaluator": "deepseek-ai/DeepSeek-R1-Distill-Qwen-14B"
+    },
+    {
+      "dataset": "logiqa",
+      "generator": "openai/gpt-oss-20b",
+      "evaluator": "deepseek-ai/DeepSeek-R1-Distill-Qwen-32B"
+    },
+    {
+      "dataset": "logiqa",
+      "generator": "Qwen/Qwen3-14B",
+      "evaluator": "nvidia/Llama-3.1-Nemotron-Nano-8B-v1"
+    },
+    {
+      "dataset": "logiqa",
+      "generator": "mistralai/Magistral-Small-2506",
+      "evaluator": "microsoft/Phi-4-reasoning"
+    },
+    {
+      "dataset": "commonsense_qa",
+      "generator": "Qwen/Qwen3-32B",
+      "evaluator": "Qwen/Qwen3-32B"
+    },
+    {
+      "dataset": "commonsense_qa",
+      "generator": "deepseek-ai/DeepSeek-R1-Distill-Qwen-32B",
+      "evaluator": "deepseek-ai/DeepSeek-R1-Distill-Qwen-32B"
+    },
+    {
+      "dataset": "commonsense_qa",
+      "generator": "allenai/Olmo-3.1-32B-Think",
+      "evaluator": "allenai/Olmo-3.1-32B-Think"
+    },
+    {
+      "dataset": "commonsense_qa",
+      "generator": "microsoft/Phi-4-reasoning",
+      "evaluator": "microsoft/Phi-4-reasoning"
+    },
+    {
+      "dataset": "commonsense_qa",
+      "generator": "deepseek-ai/DeepSeek-R1-Distill-Qwen-14B",
+      "evaluator": "deepseek-ai/DeepSeek-R1-Distill-Qwen-14B"
+    },
+    {
+      "dataset": "commonsense_qa",
+      "generator": "deepseek-ai/DeepSeek-R1-Distill-Llama-8B",
+      "evaluator": "deepseek-ai/DeepSeek-R1-Distill-Llama-8B"
+    },
+    {
+      "dataset": "commonsense_qa",
+      "generator": "Qwen/Qwen3-14B",
+      "evaluator": "Qwen/Qwen3-14B"
+    },
+    {
+      "dataset": "commonsense_qa",
+      "generator": "Qwen/Qwen3-8B",
+      "evaluator": "Qwen/Qwen3-8B"
+    },
+    {
+      "dataset": "commonsense_qa",
+      "generator": "microsoft/Phi-4-reasoning-plus",
+      "evaluator": "microsoft/Phi-4-reasoning-plus"
+    },
+    {
+      "dataset": "commonsense_qa",
+      "generator": "openai/gpt-oss-20b",
+      "evaluator": "openai/gpt-oss-20b"
+    },
+    {
+      "dataset": "commonsense_qa",
+      "generator": "mistralai/Magistral-Small-2506",
+      "evaluator": "mistralai/Magistral-Small-2506"
+    },
+    {
+      "dataset": "commonsense_qa",
+      "generator": "nvidia/Llama-3.1-Nemotron-Nano-8B-v1",
+      "evaluator": "nvidia/Llama-3.1-Nemotron-Nano-8B-v1"
+    },
+    {
+      "dataset": "commonsense_qa",
+      "generator": "deepseek-ai/DeepSeek-R1-Distill-Llama-8B",
+      "evaluator": "nvidia/Llama-3.1-Nemotron-Nano-8B-v1"
+    },
+    {
+      "dataset": "commonsense_qa",
+      "generator": "nvidia/Llama-3.1-Nemotron-Nano-8B-v1",
+      "evaluator": "mistralai/Magistral-Small-2506"
+    },
+    {
+      "dataset": "commonsense_qa",
+      "generator": "mistralai/Magistral-Small-2506",
+      "evaluator": "deepseek-ai/DeepSeek-R1-Distill-Llama-8B"
+    },
+    {
+      "dataset": "commonsense_qa",
+      "generator": "openai/gpt-oss-20b",
+      "evaluator": "Qwen/Qwen3-14B"
+    },
+    {
+      "dataset": "commonsense_qa",
+      "generator": "microsoft/Phi-4-reasoning-plus",
+      "evaluator": "Qwen/Qwen3-32B"
+    },
+    {
+      "dataset": "commonsense_qa",
+      "generator": "deepseek-ai/DeepSeek-R1-Distill-Qwen-32B",
+      "evaluator": "deepseek-ai/DeepSeek-R1-Distill-Qwen-14B"
+    },
+    {
+      "dataset": "commonsense_qa",
+      "generator": "microsoft/Phi-4-reasoning",
+      "evaluator": "Qwen/Qwen3-8B"
+    },
+    {
+      "dataset": "commonsense_qa",
+      "generator": "Qwen/Qwen3-14B",
+      "evaluator": "allenai/Olmo-3.1-32B-Think"
+    },
+    {
+      "dataset": "commonsense_qa",
+      "generator": "deepseek-ai/DeepSeek-R1-Distill-Qwen-14B",
+      "evaluator": "microsoft/Phi-4-reasoning-plus"
+    },
+    {
+      "dataset": "commonsense_qa",
+      "generator": "nvidia/Llama-3.1-Nemotron-Nano-8B-v1",
+      "evaluator": "microsoft/Phi-4-reasoning"
+    },
+    {
+      "dataset": "commonsense_qa",
+      "generator": "Qwen/Qwen3-32B",
+      "evaluator": "openai/gpt-oss-20b"
+    },
+    {
+      "dataset": "commonsense_qa",
+      "generator": "Qwen/Qwen3-8B",
+      "evaluator": "deepseek-ai/DeepSeek-R1-Distill-Qwen-32B"
+    },
+    {
+      "dataset": "commonsense_qa",
+      "generator": "allenai/Olmo-3.1-32B-Think",
+      "evaluator": "deepseek-ai/DeepSeek-R1-Distill-Llama-8B"
+    },
+    {
+      "dataset": "commonsense_qa",
+      "generator": "microsoft/Phi-4-reasoning-plus",
+      "evaluator": "nvidia/Llama-3.1-Nemotron-Nano-8B-v1"
+    },
+    {
+      "dataset": "commonsense_qa",
+      "generator": "Qwen/Qwen3-14B",
+      "evaluator": "deepseek-ai/DeepSeek-R1-Distill-Qwen-32B"
+    },
+    {
+      "dataset": "commonsense_qa",
+      "generator": "microsoft/Phi-4-reasoning",
+      "evaluator": "openai/gpt-oss-20b"
+    },
+    {
+      "dataset": "commonsense_qa",
+      "generator": "mistralai/Magistral-Small-2506",
+      "evaluator": "deepseek-ai/DeepSeek-R1-Distill-Qwen-14B"
+    },
+    {
+      "dataset": "commonsense_qa",
+      "generator": "deepseek-ai/DeepSeek-R1-Distill-Qwen-14B",
+      "evaluator": "Qwen/Qwen3-14B"
+    },
+    {
+      "dataset": "commonsense_qa",
+      "generator": "allenai/Olmo-3.1-32B-Think",
+      "evaluator": "Qwen/Qwen3-32B"
+    },
+    {
+      "dataset": "commonsense_qa",
+      "generator": "deepseek-ai/DeepSeek-R1-Distill-Llama-8B",
+      "evaluator": "Qwen/Qwen3-8B"
+    },
+    {
+      "dataset": "commonsense_qa",
+      "generator": "openai/gpt-oss-20b",
+      "evaluator": "mistralai/Magistral-Small-2506"
+    },
+    {
+      "dataset": "commonsense_qa",
+      "generator": "deepseek-ai/DeepSeek-R1-Distill-Qwen-32B",
+      "evaluator": "microsoft/Phi-4-reasoning"
+    },
+    {
+      "dataset": "commonsense_qa",
+      "generator": "Qwen/Qwen3-8B",
+      "evaluator": "microsoft/Phi-4-reasoning-plus"
+    },
+    {
+      "dataset": "commonsense_qa",
+      "generator": "Qwen/Qwen3-32B",
+      "evaluator": "allenai/Olmo-3.1-32B-Think"
+    },
+    {
+      "dataset": "commonsense_qa",
+      "generator": "deepseek-ai/DeepSeek-R1-Distill-Qwen-32B",
+      "evaluator": "Qwen/Qwen3-32B"
+    },
+    {
+      "dataset": "commonsense_qa",
+      "generator": "nvidia/Llama-3.1-Nemotron-Nano-8B-v1",
+      "evaluator": "allenai/Olmo-3.1-32B-Think"
+    },
+    {
+      "dataset": "commonsense_qa",
+      "generator": "deepseek-ai/DeepSeek-R1-Distill-Llama-8B",
+      "evaluator": "Qwen/Qwen3-14B"
+    },
+    {
+      "dataset": "commonsense_qa",
+      "generator": "Qwen/Qwen3-8B",
+      "evaluator": "mistralai/Magistral-Small-2506"
+    },
+    {
+      "dataset": "commonsense_qa",
+      "generator": "deepseek-ai/DeepSeek-R1-Distill-Qwen-14B",
+      "evaluator": "openai/gpt-oss-20b"
+    },
+    {
+      "dataset": "commonsense_qa",
+      "generator": "microsoft/Phi-4-reasoning",
+      "evaluator": "deepseek-ai/DeepSeek-R1-Distill-Llama-8B"
+    },
+    {
+      "dataset": "commonsense_qa",
+      "generator": "Qwen/Qwen3-32B",
+      "evaluator": "Qwen/Qwen3-8B"
+    },
+    {
+      "dataset": "commonsense_qa",
+      "generator": "allenai/Olmo-3.1-32B-Think",
+      "evaluator": "microsoft/Phi-4-reasoning-plus"
+    },
+    {
+      "dataset": "commonsense_qa",
+      "generator": "microsoft/Phi-4-reasoning-plus",
+      "evaluator": "deepseek-ai/DeepSeek-R1-Distill-Qwen-14B"
+    },
+    {
+      "dataset": "commonsense_qa",
+      "generator": "openai/gpt-oss-20b",
+      "evaluator": "deepseek-ai/DeepSeek-R1-Distill-Qwen-32B"
+    },
+    {
+      "dataset": "commonsense_qa",
+      "generator": "Qwen/Qwen3-14B",
+      "evaluator": "nvidia/Llama-3.1-Nemotron-Nano-8B-v1"
+    },
+    {
+      "dataset": "commonsense_qa",
+      "generator": "mistralai/Magistral-Small-2506",
+      "evaluator": "microsoft/Phi-4-reasoning"
+    }
+  ]
+}

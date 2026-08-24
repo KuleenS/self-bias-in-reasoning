@@ -19,7 +19,11 @@ def _safe_load(hf_id: str, subset: str | None, split: str):
     args = (hf_id,) if subset is None else (hf_id, subset)
     try:
         return load_dataset(*args, split=split)
-    except Exception:
+    except Exception as e:
+        if "Dataset scripts are no longer supported" in str(e):
+            # Recent `datasets` hard-blocks legacy loading-script repos; HF auto-converts them to
+            # Parquet on this ref regardless.
+            return load_dataset(*args, split=split, revision="refs/convert/parquet")
         # Older datasets ship a loading script.
         return load_dataset(*args, split=split, trust_remote_code=True)
 

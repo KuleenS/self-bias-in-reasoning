@@ -21,4 +21,4 @@ MODEL="${1:?usage: sbatch generate.job MODEL [DATASET ...]}"; shift || true
 ARGS=(--model "$MODEL")
 for d in "$@"; do ARGS+=(--dataset "$d"); done
 
-uv run --extra vllm selfbias generate "${ARGS[@]}"
+uv run selfbias generate "${ARGS[@]}"

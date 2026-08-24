@@ -24,3 +24,5 @@ run_evals.sh
 
 # Generated plots
 results/plots/
+data/chains
+data/judgments

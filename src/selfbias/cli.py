@@ -43,11 +43,20 @@ def cmd_generate(
     """Generate reasoning chains for model(s) over dataset(s)."""
     from selfbias.config import experiment_config
     from selfbias.generate import run_generation
+    from selfbias.inference.factory import build_backend
+    from selfbias.models.registry import get_model
 
     datasets = dataset or experiment_config()["datasets"]
     for m in model:
+        spec = get_model(m)
+        be = build_backend(spec, backend)  # load the model once, reuse across datasets
         for ds in datasets:
-            run_generation(m, ds, n_prompts, seed, mode=backend)
+            try:
+                run_generation(spec, ds, n_prompts, seed, mode=backend, backend=be)
+            except Exception as e:
+                # One bad dataset (e.g. a transient/gone HF repo) shouldn't sink the rest of
+                # this model's run, and definitely shouldn't leave the job hanging.
+                typer.echo(f"[generate] {spec.short} x {ds}: FAILED ({e!r}); continuing", err=True)
 
 
 @app.command("evaluate")
@@ -60,10 +69,18 @@ def cmd_evaluate(
     """Have an evaluator judge a generator's chains on dataset(s)."""
     from selfbias.config import experiment_config
     from selfbias.evaluate import run_evaluation
+    from selfbias.inference.factory import build_backend
+    from selfbias.models.registry import get_model
 
     datasets = dataset or experiment_config()["datasets"]
+    ev_spec = get_model(evaluator)
+    be = build_backend(ev_spec, backend)  # load the model once, reuse across datasets
     for ds in datasets:
-        run_evaluation(evaluator, generator, ds, mode=backend)
+        try:
+            run_evaluation(ev_spec, generator, ds, mode=backend, backend=be)
+        except Exception as e:
+            typer.echo(f"[evaluate] {ev_spec.short} on {generator} x {ds}: FAILED ({e!r}); "
+                       "continuing", err=True)
 
 
 @app.command("doe")

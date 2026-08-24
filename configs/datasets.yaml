@@ -66,7 +66,8 @@ bbh:
     - sports_understanding
 
 folio:
-  split: validation   # local JSONL under data/FOLIO/
+  hf_id: tasksource/folio
+  split: validation
   answer_type: mcq
   domain: logic
   description: First-order-logic entailment; presented as True/False/Uncertain MCQ.

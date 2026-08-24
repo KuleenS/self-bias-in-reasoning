@@ -1,0 +1,182 @@
+#!/bin/bash
+#
+#SBATCH --job-name=selfbias_serve_online
+#SBATCH --output=slurm-serve-online-%j.out
+#SBATCH --error=slurm-serve-online-%j.out
+#SBATCH --ntasks=1
+#SBATCH --cpus-per-task=4
+#SBATCH --mem-per-cpu=16000
+#SBATCH --gres=gpu:2
+#SBATCH --partition=a100,nvl,h100
+#SBATCH --time=48:00:00
+#SBATCH --exclude=n05,n06
+#SBATCH --account=ghadfie1
+#SBATCH --mail-type=END,FAIL
+#SBATCH --mail-user=ksasse1@jhu.edu
+#
+# Serve one model via `vllm serve` for the vllm_online backend (models.yaml models that don't
+# work with the offline engine, e.g. Phi-4-reasoning-plus, gpt-oss-20b, Magistral-Small-2506,
+# Nemotron-Nano-8B-v1), then run generation and evaluation for it against that same server, in
+# one job. Generates MODEL's chains, then evaluates MODEL (as evaluator) on itself plus any
+# --generators given, over --datasets (default: all datasets in experiment.yaml). Also writes
+# VLLM_BASE_URL/VLLM_API_KEY into .env so a separate manual `evaluate.job MODEL <other-gen>` can
+# reuse this same server later while it's still up.
+#
+# Usage:
+#   sbatch slurm/serve_online.job openai/gpt-oss-20b
+#   sbatch slurm/serve_online.job openai/gpt-oss-20b --datasets gsm8k folio
+#   sbatch slurm/serve_online.job openai/gpt-oss-20b --generators qwen ds14b --datasets gsm8k
+#
+# --generators are the OTHER generators' chains (already produced) to evaluate MODEL against, in
+# addition to MODEL's own (self) chains, which are always evaluated.
+#
+# Only one online model should be served at a time (VLLM_BASE_URL/.env is shared/global) —
+# don't run two of these jobs concurrently.
+set -euo pipefail
+MODEL="${1:?usage: sbatch serve_online.job MODEL [--datasets D ...] [--generators GEN ...]}"
+shift
+
+DATASETS=()
+GENERATORS=()
+_section=""
+for arg in "$@"; do
+  case "$arg" in
+    --datasets) _section=datasets; continue ;;
+    --generators) _section=generators; continue ;;
+  esac
+  case "$_section" in
+    datasets) DATASETS+=("$arg") ;;
+    generators) GENERATORS+=("$arg") ;;
+    *) echo "ERROR: unexpected argument '$arg' before --datasets/--generators" >&2; exit 1 ;;
+  esac
+done
+
+export $(grep -v '^#' .env | xargs)
+
+# ---------------------------------------------------------------------------
+SIF_PATH=${SIF_PATH:-"/scratch/ghadfie1/ksasse/apptainer/bin/vllm-cu130-nightly.sif"}
+
+APPTAINER_COMMAND=${APPTAINER_COMMAND:-"/scratch/ghadfie1/ksasse/apptainer/bin/apptainer"}
+
+# Pick a free TCP port on this node (fallback to 8000 if none found quickly)
+find_free_port() {
+  local port
+  for _ in {1..200}; do
+    port=$(shuf -i 20000-65000 -n 1)
+    if ! ss -lnt 2>/dev/null | awk '{print $4}' | grep -qE "[:.]${port}$"; then
+      echo "$port"
+      return 0
+    fi
+  done
+  echo "8000"
+}
+
+VLLM_PORT=${VLLM_PORT:-$(find_free_port)}
+NODE_HOSTNAME=$(hostname -s)
+
+HOST=${HOST:-"0.0.0.0"}
+DTYPE=${DTYPE:-"bfloat16"}
+GPU_UTIL=${GPU_UTIL:-0.90}
+MAX_TOKENS=${MAX_TOKENS:-32768}
+CACHE_DIR=${CACHE_DIR:-"/scratch/ghadfie1/shared-models/huggingface_cache"}
+API_KEY=${API_KEY:-"token-abc123"}
+KV_CACHE_DTYPE=${KV_CACHE_DTYPE:-"auto"}
+
+GPUS=${GPUS:-"0,1"}
+export CUDA_VISIBLE_DEVICES="$GPUS"
+IFS=',' read -r -a _GPU_ARR <<< "$GPUS"
+NUM_GPUS=${#_GPU_ARR[@]}
+TENSOR_PARALLELISM=${TENSOR_PARALLELISM:-$NUM_GPUS}
+
+echo "================================================================="
+echo "Node: ${NODE_HOSTNAME}  Port: ${VLLM_PORT}"
+echo "Model: ${MODEL}"
+echo "API key: ${API_KEY}"
+echo "--> API BASE URL: http://${NODE_HOSTNAME}:${VLLM_PORT}/v1"
+echo "HOST=$HOST  NUM_GPUS=$NUM_GPUS  TP=$TENSOR_PARALLELISM  DTYPE=$DTYPE  MAX_TOKENS=$MAX_TOKENS  GPU_UTIL=$GPU_UTIL  KV_CACHE_DTYPE=$KV_CACHE_DTYPE"
+echo "CACHE_DIR=$CACHE_DIR"
+echo "================================================================="
+
+mkdir -p "$CACHE_DIR"
+export HF_HOME="$CACHE_DIR"
+export HUGGINGFACE_HUB_CACHE="$CACHE_DIR"
+
+mkdir -p "/scratch/ghadfie1/ksasse/logs_harbor"
+LOG_FILE="/scratch/ghadfie1/ksasse/logs_harbor/vllm_serve_online_$(date +%Y%m%d_%H%M%S).log"
+
+$APPTAINER_COMMAND exec --nv \
+  --env FLASHINFER_WORKSPACE_DIR=/tmp/flashinfer \
+  --bind /weka/scratch/ghadfie1:/scratch/ghadfie1 \
+  --bind /weka/home/ksasse:/home/ksasse \
+  "${SIF_PATH}" \
+  vllm serve "$MODEL" \
+    --host "$HOST" \
+    --port "$VLLM_PORT" \
+    --dtype "$DTYPE" \
+    --tensor-parallel-size "$TENSOR_PARALLELISM" \
+    --gpu-memory-utilization "$GPU_UTIL" \
+    --max-model-len "$MAX_TOKENS" \
+    --kv-cache-dtype "$KV_CACHE_DTYPE" \
+    --trust-remote-code \
+    --download-dir "$CACHE_DIR" \
+    --enable-log-requests \
+    --enforce-eager \
+    > "$LOG_FILE" 2>&1 &
+
+server_pid=$!
+trap 'echo "Shutting down vLLM (pid '"$server_pid"')..."; kill "$server_pid" 2>/dev/null || true; wait "$server_pid" 2>/dev/null || true; echo "Done."' EXIT
+
+echo "Starting vLLM server (pid: $server_pid), logging to $LOG_FILE"
+
+# Fail if the server process dies or if it doesn't become ready in time
+max_wait_s=${VLLM_STARTUP_TIMEOUT_S:-500}
+deadline=$((SECONDS + max_wait_s))
+
+until curl -s "http://localhost:$VLLM_PORT" > /dev/null; do
+  if ! kill -0 "$server_pid" 2>/dev/null; then
+    echo "ERROR: vLLM server exited during startup; last logs:" >&2
+    tail -n 200 "$LOG_FILE" >&2 || true
+    exit 1
+  fi
+  if (( SECONDS >= deadline )); then
+    echo "ERROR: vLLM server did not become ready within ${max_wait_s}s; last logs:" >&2
+    tail -n 200 "$LOG_FILE" >&2 || true
+    exit 1
+  fi
+  echo "Waiting for server to start..."
+  sleep 5
+done
+
+# Publish the base URL for a separate manual evaluate.job reusing this server later
+# (python-dotenv loads .env automatically), and export it for this shell's own use below.
+BASE_URL="http://${NODE_HOSTNAME}:${VLLM_PORT}/v1"
+grep -v '^VLLM_BASE_URL=' .env > .env.tmp 2>/dev/null || true
+grep -v '^VLLM_API_KEY=' .env.tmp > .env.tmp2 2>/dev/null || true
+{ cat .env.tmp2 2>/dev/null; echo "VLLM_BASE_URL=${BASE_URL}"; echo "VLLM_API_KEY=${API_KEY}"; } > .env
+rm -f .env.tmp .env.tmp2
+export VLLM_BASE_URL="$BASE_URL"
+export VLLM_API_KEY="$API_KEY"
+echo "server ready -> ${BASE_URL} (also written to .env)"
+
+echo "--- generating chains: $MODEL ---"
+GEN_ARGS=(--model "$MODEL")
+for d in "${DATASETS[@]}"; do GEN_ARGS+=(--dataset "$d"); done
+uv run selfbias generate "${GEN_ARGS[@]}"
+
+# Always evaluate MODEL on its own chains (self cell); plus any other generators requested.
+_seen=""
+EVAL_GENERATORS=()
+for g in "$MODEL" "${GENERATORS[@]}"; do
+  case " $_seen " in *" $g "*) continue ;; esac
+  EVAL_GENERATORS+=("$g")
+  _seen="$_seen $g"
+done
+
+for gen in "${EVAL_GENERATORS[@]}"; do
+  echo "--- evaluating: $MODEL on $gen ---"
+  EVAL_ARGS=(--evaluator "$MODEL" --generator "$gen")
+  for d in "${DATASETS[@]}"; do EVAL_ARGS+=(--dataset "$d"); done
+  uv run selfbias evaluate "${EVAL_ARGS[@]}"
+done
+
+echo "done: $MODEL generation + evaluation complete; shutting down server"

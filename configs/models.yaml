@@ -16,7 +16,6 @@ Qwen/Qwen3-32B:
   short: qwen
   reasoning: true
   thinking_template: true
-  tensor_parallel: 2
 
 deepseek-ai/DeepSeek-R1-Distill-Qwen-32B:
   id: deepseek-ai/DeepSeek-R1-Distill-Qwen-32B
@@ -24,7 +23,6 @@ deepseek-ai/DeepSeek-R1-Distill-Qwen-32B:
   family: deepseek
   short: ds
   reasoning: true
-  tensor_parallel: 2
 
 allenai/Olmo-3.1-32B-Think:
   id: allenai/Olmo-3.1-32B-Think
@@ -32,7 +30,6 @@ allenai/Olmo-3.1-32B-Think:
   family: olmo
   short: olmo
   reasoning: true
-  tensor_parallel: 2
 
 microsoft/Phi-4-reasoning:
   id: microsoft/Phi-4-reasoning
@@ -40,7 +37,6 @@ microsoft/Phi-4-reasoning:
   family: phi
   short: phi
   reasoning: true
-  tensor_parallel: 2
 
 Qwen/QwQ-32B:
   id: Qwen/QwQ-32B
@@ -48,7 +44,6 @@ Qwen/QwQ-32B:
   family: qwen
   short: qwq
   reasoning: true
-  tensor_parallel: 2
   sampling: {temperature: 0.6, top_p: 0.95, top_k: 40, max_tokens: 32768}
 
 google/gemma-3-27b-it:
@@ -57,7 +52,6 @@ google/gemma-3-27b-it:
   family: gemma
   short: gemma
   reasoning: false        # non-reasoning baseline: does self-bias appear without explicit CoT?
-  tensor_parallel: 2
 
 # ---------------- Open-weight (local vLLM, single 80GB GPU) ----------------
 # Smaller reasoning models that fit on one GPU (tensor_parallel defaults to 1).
@@ -92,23 +86,26 @@ Qwen/Qwen3-8B:
   reasoning: true
   thinking_template: true
 
+# These four aren't supported by the offline vLLM engine in our current apptainer image
+# (unsupported architectures for batched offline generation) — served via `vllm serve` instead.
+# Start slurm/serve_online.job <model> first; it writes VLLM_BASE_URL into .env for these to pick up.
 microsoft/Phi-4-reasoning-plus:
   id: microsoft/Phi-4-reasoning-plus
-  backend: vllm_offline
+  backend: vllm_online
   family: phi
   short: phiplus
   reasoning: true
 
 openai/gpt-oss-20b:
   id: openai/gpt-oss-20b
-  backend: vllm_offline
+  backend: vllm_online
   family: openai
   short: gptoss20b
   reasoning: true
 
 mistralai/Magistral-Small-2506:
   id: mistralai/Magistral-Small-2506
-  backend: vllm_offline
+  backend: vllm_online
   family: mistral
   short: magistral
   reasoning: true
@@ -116,7 +113,7 @@ mistralai/Magistral-Small-2506:
 
 nvidia/Llama-3.1-Nemotron-Nano-8B-v1:
   id: nvidia/Llama-3.1-Nemotron-Nano-8B-v1
-  backend: vllm_offline
+  backend: vllm_online
   family: nvidia
   short: nemotron8b
   reasoning: true  # thinking toggled via "detailed thinking on" system prompt, not a chat-template flag

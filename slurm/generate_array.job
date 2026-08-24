@@ -1,0 +1,54 @@
+#!/bin/bash
+#SBATCH --job-name=selfbias_generate_arr
+#SBATCH --output=slurm-generate-%A_%a.out
+#SBATCH --error=slurm-generate-%A_%a.out
+#SBATCH --ntasks=1
+#SBATCH --partition=nvl
+#SBATCH --time=48:00:00
+#SBATCH --cpus-per-task=4
+#SBATCH --mem-per-cpu=32000
+#SBATCH --gres=gpu:2
+#SBATCH --account=ghadfie1
+#SBATCH --mail-type=END,FAIL
+#SBATCH --mail-user=ksasse1@jhu.edu
+#SBATCH --requeue
+#SBATCH --exclude=n05,n06
+#
+# Array task: each task generates chains for one offline model, read by line number from a plan
+# file (one model per line). Submitted by scripts/run_cluster.sh as a single job array so the
+# whole phase can be cancelled with one `scancel <jobid>` (or one task with `scancel <jobid>_<n>`).
+#
+# Usage: sbatch --array=0-N%CONCURRENCY slurm/generate_array.job <plan_file>
+set -uo pipefail
+PLAN_FILE="${1:?usage: sbatch --array=0-N generate_array.job PLAN_FILE}"
+LINE=$((SLURM_ARRAY_TASK_ID + 1))
+MODEL=$(sed -n "${LINE}p" "$PLAN_FILE")
+[[ -n "$MODEL" ]] || { echo "ERROR: no model on line $LINE of $PLAN_FILE" >&2; exit 1; }
+
+# Models and datasets are already fully cached under $HF_HOME (shared across the cluster) —
+# skip HF Hub's "is this up to date" network check, which has been failing intermittently on
+# some compute nodes ("Network is unreachable") and is unnecessary for already-cached content.
+export HF_HUB_OFFLINE=1
+
+echo "[array task $SLURM_ARRAY_TASK_ID] generating: $MODEL"
+
+LOG_TMP=$(mktemp)
+uv run selfbias generate --model "$MODEL" 2>&1 | tee "$LOG_TMP"
+status=${PIPESTATUS[0]}
+
+if [[ $status -ne 0 ]]; then
+  attempt="${SLURM_RESTART_COUNT:-0}"
+  if [[ "$attempt" -lt 3 ]] && grep -qE \
+      "Can't initialize NVML|CUDA initialization|CUDA unknown error|Engine core initialization failed|NVIDIA-SMI has failed" \
+      "$LOG_TMP"; then
+    echo "[array task $SLURM_ARRAY_TASK_ID] GPU/node failure on $(hostname -s) (attempt" \
+         "$attempt) -- requeuing for a fresh node" >&2
+    scontrol requeue "${SLURM_ARRAY_JOB_ID}_${SLURM_ARRAY_TASK_ID}"
+    rm -f "$LOG_TMP"
+    sleep 60  # give scontrol time to act before slurmstepd reaps this step
+    exit 0
+  fi
+fi
+
+rm -f "$LOG_TMP"
+exit "$status"

@@ -30,5 +30,7 @@ datasets:
   - commonsense_qa
 
 n_prompts: 200      # prompts sampled per dataset
-doe_budget: 24      # generator x evaluator cells actually run per dataset (D-optimal subset)
+doe_budget: 48      # generator x evaluator cells actually run per dataset (D-optimal subset);
+                    # pool has 12 models (24 params, full square 144 cells) — 48 gives ~0.94
+                    # D-efficiency vs. the full square at 67% inference savings
 seed: 0

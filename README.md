@@ -25,8 +25,7 @@ never shown to the evaluator.
 Uses [uv](https://docs.astral.sh/uv/).
 
 ```bash
-uv sync                 # core: analysis + API inference (no GPU)
-uv sync --extra vllm    # add local GPU inference (vLLM + torch)
+uv sync                 # core + local GPU inference (vLLM + torch) — one environment
 cp .env.example .env    # add OPENROUTER_API_KEY / HF_TOKEN as needed
 ```
 

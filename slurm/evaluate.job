@@ -24,4 +24,4 @@ shift 2 || true
 ARGS=(--evaluator "$EVAL" --generator "$GEN")
 for d in "$@"; do ARGS+=(--dataset "$d"); done
 
-uv run --extra vllm selfbias evaluate "${ARGS[@]}"
+uv run selfbias evaluate "${ARGS[@]}"
